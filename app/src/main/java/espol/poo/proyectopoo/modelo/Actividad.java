@@ -1,6 +1,8 @@
 package espol.poo.proyectopoo.modelo;
 
-public class Actividad {
+import java.io.Serializable;
+
+public class Actividad implements Serializable {
     protected int id;
     private static int idSetter = 1;
     protected String nombre;
@@ -33,9 +35,16 @@ public class Actividad {
     public String getNombre(){
         return nombre;
     }
+    public String getFecha(){ return fecha; }
+    public String getPrioridad(){ return prioridad; }
+    public int getTiempoEstimado(){
+        return tiempoEstimado;
+    }
     public void setAvance(int a){
         this.avance = a < 100 ? a : 100;
     }
+
+
     /*
         Devolver información general dependiendo el caso de uso
         modo 2: Se usa para el apartado de tabla de avances

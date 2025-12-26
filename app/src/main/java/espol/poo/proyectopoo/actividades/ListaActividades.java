@@ -1,0 +1,42 @@
+package espol.poo.proyectopoo.actividades;
+
+import android.os.Bundle;
+import android.widget.LinearLayout;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import espol.poo.proyectopoo.R;
+import espol.poo.proyectopoo.modelo.Actividad;
+import espol.poo.proyectopoo.modelo.tipoActividad;
+
+import java.util.ArrayList;
+public class ListaActividades extends AppCompatActivity {
+    ArrayList<Actividad> lactividades = new ArrayList<>();
+    int[] lid = {1,2,3};
+    String[] lnombre = {"Actividad 1", "Actividad 2", "Actividad 3"};
+
+    String[] lfecha = {"2026-01-01", "2026-01-02", "2026-01-03"};
+    String[] lprioridad = {"Alta", "Media", "Baja"};
+    int[] lavance = {10, 20, 30};
+
+    RecyclerView rv1;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_lista_actividades);
+        rv1 = findViewById(R.id.rvItemAc);
+        setData();
+        AdaptadorItemActividad adaptador = new AdaptadorItemActividad(this, lactividades);
+        rv1.setAdapter(adaptador);
+        rv1.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    private void setData(){
+        for(int i=0; i<3; i++){
+            Actividad a = new Actividad(lnombre[i], lfecha[i], 30 + i, "Tarea de id: " + i, lprioridad[i], lavance[i], tipoActividad.TAREA);
+            lactividades.add(a);
+        }
+    }
+}
