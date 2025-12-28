@@ -24,7 +24,7 @@ public class AdaptadorItemActividad extends RecyclerView.Adapter<AdaptadorItemAc
     @Override
     public AdaptadorItemActividad.ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.activity_item_actividad, parent, false);
+        View view = inflater.inflate(R.layout.item_ac_academica, parent, false);
         return new AdaptadorItemActividad.ItemViewHolder(view);
     }
 
