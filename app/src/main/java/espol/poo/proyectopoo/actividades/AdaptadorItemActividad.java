@@ -25,12 +25,6 @@ public class AdaptadorItemActividad extends RecyclerView.Adapter<AdaptadorItemAc
     Context context;
     public AdaptadorItemActividad(Context context, ArrayList<Actividad> listaActividades){
         this.listaActividades = listaActividades;
-        for(Actividad a : this.listaActividades){
-            Log.d("DEBUG: ", "Actividad: " + a.getId());
-            if(a instanceof ActividadAcademica){
-                Log.d("DEBUG: ", "Actividad academica: " + a.getNombre());
-            }
-        }
         this.context = context;
     }
 
@@ -52,7 +46,7 @@ public class AdaptadorItemActividad extends RecyclerView.Adapter<AdaptadorItemAc
         }
         else{
             Log.d("DEBUG: ", "Tipo de actividad personal (en desarrollo)");
-            view = inflater.inflate(R.layout.item_ac_academica, parent, false);
+            view = inflater.inflate(R.layout.item_ac_personal, parent, false);
         }
         return new AdaptadorItemActividad.ItemViewHolder(view);
     }

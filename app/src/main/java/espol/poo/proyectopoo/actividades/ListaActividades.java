@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import espol.poo.proyectopoo.R;
 import espol.poo.proyectopoo.modelo.Actividad;
 import espol.poo.proyectopoo.modelo.ActividadAcademica;
+import espol.poo.proyectopoo.modelo.ActividadPersonal;
 import espol.poo.proyectopoo.modelo.tipoActividad;
 
 import java.util.ArrayList;
@@ -41,6 +42,7 @@ public class ListaActividades extends AppCompatActivity {
             Actividad a = new ActividadAcademica(lnombre[i], lfecha[i], 30 + i, "Tarea de id: " + i, lprioridad[i], "POO", lavance[i], tipoActividad.TAREA, "En curso");
             lactividades.add(a);
         }
+        lactividades.add(new ActividadPersonal("Ir al doctor", "2026-01-01", 2, "Tarea de ejemplo", "Alta", 0, "Omni hospital", tipoActividad.PERSONAL));
     }
 
 
