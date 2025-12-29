@@ -1,7 +1,9 @@
 package espol.poo.proyectopoo.actividades;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -9,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import espol.poo.proyectopoo.R;
 import espol.poo.proyectopoo.modelo.Actividad;
+import espol.poo.proyectopoo.modelo.ActividadAcademica;
 import espol.poo.proyectopoo.modelo.tipoActividad;
 
 import java.util.ArrayList;
@@ -35,8 +38,10 @@ public class ListaActividades extends AppCompatActivity {
 
     private void setData(){
         for(int i=0; i<3; i++){
-            Actividad a = new Actividad(lnombre[i], lfecha[i], 30 + i, "Tarea de id: " + i, lprioridad[i], lavance[i], tipoActividad.TAREA);
+            Actividad a = new ActividadAcademica(lnombre[i], lfecha[i], 30 + i, "Tarea de id: " + i, lprioridad[i], "POO", lavance[i], tipoActividad.TAREA, "En curso");
             lactividades.add(a);
         }
     }
+
+
 }

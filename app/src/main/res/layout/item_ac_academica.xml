@@ -87,7 +87,6 @@
                             android:backgroundTint="#00B050"
                             android:insetTop="0dp"
                             android:insetBottom="0dp"
-                            android:onClick="detalles"
                             android:text="Detalles"
                             android:textAllCaps="false"
                             android:textColor="@android:color/white"
