@@ -89,7 +89,7 @@
                             android:insetBottom="0dp"
                             android:text="Detalles"
                             android:textAllCaps="false"
-                            android:textColor="@android:color/white"
+                            android:textColor="@android:color/black"
                             android:textSize="10sp" />
 
                         <Button
@@ -118,7 +118,7 @@
                             android:insetBottom="0dp"
                             android:text="Eliminar"
                             android:textAllCaps="false"
-                            android:textColor="@android:color/white"
+                            android:textColor="@android:color/black"
                             android:textSize="10sp" />
                     </LinearLayout>
 
