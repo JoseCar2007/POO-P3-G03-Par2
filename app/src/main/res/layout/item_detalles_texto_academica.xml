@@ -45,145 +45,161 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+
                     <TextView
                         android:id="@+id/tituloNombre"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Nombre: "
                         android:textStyle="bold" />
+
                     <TextView
                         android:id="@+id/infoNombre"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Tarea de ejemplo"
+                        android:layout_marginStart="2dp"
                         android:layout_toEndOf="@id/tituloNombre"
-                        android:layout_marginStart="2dp"/>
+                        android:text="Tarea de ejemplo" />
                 </RelativeLayout>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+
                     <TextView
                         android:id="@+id/tituloTipo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Tipo: "
                         android:textStyle="bold" />
+
                     <TextView
                         android:id="@+id/infoTipo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Examen"
+                        android:layout_marginStart="2dp"
                         android:layout_toEndOf="@id/tituloTipo"
-                        android:layout_marginStart="2dp"/>
+                        android:text="Examen" />
                 </RelativeLayout>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+
                     <TextView
                         android:id="@+id/tituloAsignatura"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Asignatura: "
                         android:textStyle="bold" />
+
                     <TextView
                         android:id="@+id/infoAsignatura"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Matemáticas"
+                        android:layout_marginStart="2dp"
                         android:layout_toEndOf="@id/tituloAsignatura"
-                        android:layout_marginStart="2dp"/>
+                        android:text="Matemáticas" />
                 </RelativeLayout>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+
                     <TextView
                         android:id="@+id/tituloPrioridad"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Prioridad: "
                         android:textStyle="bold" />
+
                     <TextView
                         android:id="@+id/infoPrioridad"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Alta"
+                        android:layout_marginStart="2dp"
                         android:layout_toEndOf="@id/tituloPrioridad"
-                        android:layout_marginStart="2dp"/>
+                        android:text="Alta" />
                 </RelativeLayout>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+
                     <TextView
                         android:id="@+id/tituloEstado"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Estado: "
                         android:textStyle="bold" />
+
                     <TextView
                         android:id="@+id/infoEstado"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Pendiente"
+                        android:layout_marginStart="2dp"
                         android:layout_toEndOf="@id/tituloEstado"
-                        android:layout_marginStart="2dp"/>
+                        android:text="Pendiente" />
                 </RelativeLayout>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+
                     <TextView
                         android:id="@+id/tituloFecha"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Fecha Límite: "
                         android:textStyle="bold" />
+
                     <TextView
                         android:id="@+id/infoFecha"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="2024-12-31"
+                        android:layout_marginStart="2dp"
                         android:layout_toEndOf="@id/tituloFecha"
-                        android:layout_marginStart="2dp"/>
+                        android:text="2024-12-31" />
                 </RelativeLayout>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+
                     <TextView
                         android:id="@+id/tituloTiempo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Tiempo Estimado Total: "
                         android:textStyle="bold" />
+
                     <TextView
                         android:id="@+id/infoTiempo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="5 horas"
+                        android:layout_marginStart="2dp"
                         android:layout_toEndOf="@id/tituloTiempo"
-                        android:layout_marginStart="2dp"/>
+                        android:text="5 horas" />
                 </RelativeLayout>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+
                     <TextView
                         android:id="@+id/tituloAvance"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Avance Actual: "
                         android:textStyle="bold" />
+
                     <TextView
                         android:id="@+id/infoAvance"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="20%"
+                        android:layout_marginStart="2dp"
                         android:layout_toEndOf="@id/tituloAvance"
-                        android:layout_marginStart="2dp"/>
+                        android:text="20%" />
                 </RelativeLayout>
 
             </LinearLayout>
