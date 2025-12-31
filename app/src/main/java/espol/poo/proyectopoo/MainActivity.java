@@ -25,8 +25,8 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        //Intent inte = new Intent(this, ListaActividades.class);
-        Intent inte = new Intent(this, PantallaDetalles.class);
+        Intent inte = new Intent(this, ListaActividades.class);
+        //Intent inte = new Intent(this, PantallaDetalles.class);
         startActivity(inte);
     }
 }

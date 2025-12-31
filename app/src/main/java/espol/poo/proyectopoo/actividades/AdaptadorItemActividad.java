@@ -1,6 +1,7 @@
 package espol.poo.proyectopoo.actividades;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Debug;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -42,13 +43,13 @@ public class AdaptadorItemActividad extends RecyclerView.Adapter<AdaptadorItemAc
         View view;
         if(viewType == TYPE_ACADEMICA){
              view = inflater.inflate(R.layout.item_ac_academica, parent, false);
-             return new AdaptadorItemActividad.AcademicaViewHolder(view);
+             return new AdaptadorItemActividad.AcademicaViewHolder(view, context);
         }
         else{
             Log.d("DEBUG: ", "Tipo de actividad personal (en desarrollo)");
             view = inflater.inflate(R.layout.item_ac_personal, parent, false);
         }
-        return new AdaptadorItemActividad.ItemViewHolder(view);
+        return new AdaptadorItemActividad.ItemViewHolder(view, context);
     }
 
     @Override
@@ -68,7 +69,7 @@ public class AdaptadorItemActividad extends RecyclerView.Adapter<AdaptadorItemAc
     public static class ItemViewHolder extends RecyclerView.ViewHolder{
         TextView id, nombre, fecha, prioridad, avance;
         Actividad ac;
-        public ItemViewHolder(@NonNull View itemView) {
+        public ItemViewHolder(@NonNull View itemView, Context context) {
             super(itemView);
             id = itemView.findViewById(R.id.itId);
             nombre = itemView.findViewById(R.id.itNombre);
@@ -79,6 +80,9 @@ public class AdaptadorItemActividad extends RecyclerView.Adapter<AdaptadorItemAc
                 @Override
                 public void onClick(View v) {
                     Log.d("DEBUG: ", "Detalles de actividad con id " + ac.getId());
+                    Intent intento = new Intent(context, PantallaDetalles.class);
+                    intento.putExtra("ObjetoActividad: ", ac);
+                    context.startActivity(intento);
                 }
             });
             itemView.findViewById(R.id.btnAvance).setOnClickListener(new View.OnClickListener() {
@@ -96,8 +100,8 @@ public class AdaptadorItemActividad extends RecyclerView.Adapter<AdaptadorItemAc
         }
     }
     public static class AcademicaViewHolder extends ItemViewHolder{
-        public AcademicaViewHolder(@NonNull View itemView) {
-            super(itemView);
+        public AcademicaViewHolder(@NonNull View itemView, Context context) {
+            super(itemView, context);
             itemView.findViewById(R.id.btnPomodoro).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
