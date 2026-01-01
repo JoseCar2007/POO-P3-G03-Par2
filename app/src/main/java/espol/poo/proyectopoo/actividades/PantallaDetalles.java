@@ -11,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.zip.Inflater;
 
@@ -30,9 +32,14 @@ public class PantallaDetalles extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if(extras != null){
             Actividad ac = (Actividad) extras.getSerializable("ObjetoActividad: ");
+            ((TextView) findViewById(R.id.tituloDetalles)).setText("DETALLES DE LA ACTIVIDAD (ID"+ac.getId()+")");
             if(ac instanceof ActividadAcademica){
                 View tarjetaDetalles = i.inflate(R.layout.item_detalles_texto_academica, parent, true);
                 setDetallesAcademica(tarjetaDetalles, (ActividadAcademica) ac);
+                if(!((ActividadAcademica) ac).getTecnicas().isEmpty()){
+                    View tarjetaHistorialTiempo = i.inflate(R.layout.item_historial_gestion_tiempo, parent, true);
+                    setDetallesTecnicas(tarjetaHistorialTiempo, (ActividadAcademica) ac);
+                }
             }
             else if(ac instanceof ActividadPersonal){
                 View tarjetaDetalles = i.inflate(R.layout.item_detalles_texto_personal, parent, true);
@@ -62,5 +69,11 @@ public class PantallaDetalles extends AppCompatActivity {
         ((TextView) tarjetaDetalles.findViewById(R.id.infoTiempo)).setText(ac.getTiempoEstimado() + " horas");
         ((TextView) tarjetaDetalles.findViewById(R.id.infoAvance)).setText(ac.getAvance() + "%");
         ((TextView) tarjetaDetalles.findViewById(R.id.infoLugar)).setText(ac.getLugar());
+    }
+    private void setDetallesTecnicas(View tarjetaHistorialTiempo, ActividadAcademica ac){
+        RecyclerView rv = tarjetaHistorialTiempo.findViewById(R.id.rvHGT);
+        AdaptadorRegistroTecnicaEnfoque adaptador = new AdaptadorRegistroTecnicaEnfoque(this, ac.getTecnicas());
+        rv.setAdapter(adaptador);
+        rv.setLayoutManager(new LinearLayoutManager(this));
     }
 }

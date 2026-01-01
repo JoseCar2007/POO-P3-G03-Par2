@@ -1,11 +1,12 @@
 package espol.poo.proyectopoo.modelo;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 
-public class TecnicasEnfoque {
+public class TecnicasEnfoque implements Serializable {
     private int duracionTrabajo;
     private int duracionDescanso;
     private int ciclos;
@@ -33,6 +34,15 @@ public class TecnicasEnfoque {
     public String[] devolverInfo(){
         String[] retornable = {fechaSesion, tecnica, String.valueOf(duracionTrabajo)};
         return retornable;
+    }
+    public String getFecha(){
+        return fechaSesion;
+    }
+    public String getTecnica(){
+        return tecnica;
+    }
+    public int getDuracion(){
+        return duracionTrabajo;
     }
 
     // -------------------
