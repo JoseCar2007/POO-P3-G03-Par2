@@ -6,6 +6,9 @@ public class ActividadPersonal extends Actividad{
         super(nombre, fecha, horasEstimadas, descripcion, prioridad, avance,tipo);
         this.lugar = lugar;
     }
+    public String getLugar(){
+        return lugar;
+    }
     public String[] devolverInfoPersonal(){
         String[] retornable = {nombre, tipo.toString(), prioridad, fecha, String.valueOf(tiempoEstimado), lugar};
         return retornable;

@@ -14,6 +14,12 @@ public class ActividadAcademica extends Actividad{
         String[] retornable = {nombre, tipo.toString(), asignatura, prioridad, estado, fecha, String.valueOf(tiempoEstimado), String.valueOf(avance) + "%"};
         return retornable;
     }
+    public String getAsignatura(){
+        return asignatura;
+    }
+    public String getEstado(){
+        return estado;
+    }
     public void registrarTecnicaEnfoque(TecnicasEnfoque te){
         registroTecnicas.add(te);
     }

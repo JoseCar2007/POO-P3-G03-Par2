@@ -1,7 +1,9 @@
 package espol.poo.proyectopoo.actividades;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -9,8 +11,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import espol.poo.proyectopoo.R;
 import espol.poo.proyectopoo.modelo.Actividad;
+import espol.poo.proyectopoo.modelo.ActividadAcademica;
+import espol.poo.proyectopoo.modelo.ActividadPersonal;
 import espol.poo.proyectopoo.modelo.tipoActividad;
-
+import espol.poo.proyectopoo.modelo.TecnicasEnfoque;
 import java.util.ArrayList;
 public class ListaActividades extends AppCompatActivity {
     ArrayList<Actividad> lactividades = new ArrayList<>();
@@ -35,8 +39,16 @@ public class ListaActividades extends AppCompatActivity {
 
     private void setData(){
         for(int i=0; i<3; i++){
-            Actividad a = new Actividad(lnombre[i], lfecha[i], 30 + i, "Tarea de id: " + i, lprioridad[i], lavance[i], tipoActividad.TAREA);
+            Actividad a = new ActividadAcademica(lnombre[i], lfecha[i], 30 + i, "Tarea de id: " + i, lprioridad[i], "POO", lavance[i], tipoActividad.TAREA, "En curso");
             lactividades.add(a);
         }
+        lactividades.add(new ActividadPersonal("Ir al doctor", "2026-01-01", 2, "Tarea de ejemplo", "Alta", 0, "Omni hospital", tipoActividad.PERSONAL));
+        lactividades.add(new ActividadAcademica("Examen Quimica", "2026-01-01", 2, "Repasar capitulos 3 y 4", "Alta", "Quimica", 0, tipoActividad.PROYECTO, "En curso"));
+        for(int i=0; i<4;i++){
+            ((ActividadAcademica) lactividades.get(4)).registrarTecnicaEnfoque(new TecnicasEnfoque("Pomodoro", 25, 5, 4));
+        }
+        ((ActividadAcademica) lactividades.get(4)).registrarTecnicaEnfoque(new TecnicasEnfoque("DeepWork", 90, 0, 1));
     }
+
+
 }
