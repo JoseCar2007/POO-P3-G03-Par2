@@ -1,10 +1,13 @@
-package espol.poo.proyectopoo;
+package espol.poo.proyectopoo.actividades;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.os.CountDownTimer;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+
+import espol.poo.proyectopoo.R;
 
 public class PomodoroActivity extends AppCompatActivity {
 
@@ -13,6 +16,7 @@ public class PomodoroActivity extends AppCompatActivity {
     private CountDownTimer timer;
     private long tiempoRestante = 25 * 60 * 1000;
     private boolean corriendo = false;
+    private int tiempoActual;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,18 +24,25 @@ public class PomodoroActivity extends AppCompatActivity {
         setContentView(R.layout.activity_pomodoro);
 
         txtTimer = findViewById(R.id.txtTimer);
-        btnIniciar = findViewById(R.id.btnIniciar);
-        btnPausar = findViewById(R.id.btnPausar);
-        btnReiniciar = findViewById(R.id.btnReiniciar);
-
         actualizarTimer();
 
-        btnIniciar.setOnClickListener(v -> iniciar());
-        btnPausar.setOnClickListener(v -> pausar());
-        btnReiniciar.setOnClickListener(v -> reiniciar());
     }
-
-    private void iniciar() {
+    public void ciclo25(View v) {
+        tiempoRestante = 25 * 60 * 1000;
+        tiempoActual = 25;
+        actualizarTimer();
+    }
+    public void ciclo5(View v){
+        tiempoRestante = 5 * 60 * 1000;
+        tiempoActual = 5;
+        actualizarTimer();
+    }
+    public void ciclo15(View v) {
+        tiempoRestante = 15 * 60 * 1000;
+        tiempoActual = 15;
+        actualizarTimer();
+    }
+    public void iniciar(View v) {
         timer = new CountDownTimer(tiempoRestante, 1000) {
             public void onTick(long millisUntilFinished) {
                 tiempoRestante = millisUntilFinished;
@@ -47,16 +58,19 @@ public class PomodoroActivity extends AppCompatActivity {
         corriendo = true;
     }
 
-    private void pausar() {
+    public void pausar(View v) {
         if (corriendo) {
             timer.cancel();
             corriendo = false;
         }
     }
 
-    private void reiniciar() {
+    public void reiniciar(View v) {
         if (timer != null) timer.cancel();
-        tiempoRestante = 25 * 60 * 1000;
+
+        if(tiempoActual == 25) tiempoRestante = 25 * 60 * 1000;
+        if(tiempoActual == 5) tiempoRestante = 5 * 60 * 1000;
+        if(tiempoActual == 15) tiempoRestante = 15 * 60 * 1000;
         actualizarTimer();
     }
 

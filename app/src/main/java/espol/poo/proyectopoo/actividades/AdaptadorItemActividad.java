@@ -105,7 +105,8 @@ public class AdaptadorItemActividad extends RecyclerView.Adapter<AdaptadorItemAc
             itemView.findViewById(R.id.btnPomodoro).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.d("DEBUG: ", "Pomodoro de actividad con id " + ac.getId());
+                    Intent intento = new Intent(context, PomodoroActivity.class);
+                    context.startActivity(intento);
                 }
             });
             itemView.findViewById(R.id.btnDeepWork).setOnClickListener(new View.OnClickListener() {

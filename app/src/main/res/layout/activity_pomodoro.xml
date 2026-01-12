@@ -51,19 +51,22 @@
                 <Button
                     android:text="25 min"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:onClick="ciclo25"/>
 
                 <Button
                     android:text="5 min"
                     android:layout_marginStart="8dp"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:onClick="ciclo5"/>
 
                 <Button
                     android:text="15 min"
                     android:layout_marginStart="8dp"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:onClick="ciclo15"/>
             </LinearLayout>
 
             <TextView
@@ -86,24 +89,27 @@
                     android:id="@+id/btnIniciar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Iniciar"
-                    android:backgroundTint="#2ECC71"/>
+                    android:backgroundTint="#2ECC71"
+                    android:onClick="iniciar"
+                    android:text="Iniciar" />
 
                 <Button
                     android:id="@+id/btnPausar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Pausar"
                     android:layout_marginStart="8dp"
-                    android:backgroundTint="#F1C40F"/>
+                    android:backgroundTint="#F1C40F"
+                    android:onClick="pausar"
+                    android:text="Pausar" />
 
                 <Button
                     android:id="@+id/btnReiniciar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Reiniciar"
                     android:layout_marginStart="8dp"
-                    android:backgroundTint="#E74C3C"/>
+                    android:backgroundTint="#E74C3C"
+                    android:onClick="reiniciar"
+                    android:text="Reiniciar" />
             </LinearLayout>
 
         </LinearLayout>

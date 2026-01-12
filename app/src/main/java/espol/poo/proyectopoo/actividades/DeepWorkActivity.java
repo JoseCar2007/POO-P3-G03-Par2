@@ -1,11 +1,13 @@
-package espol.poo.proyectopoo;
+package espol.poo.proyectopoo.actividades;
 
 import android.os.Bundle;
-import android.widget.Button;
 import android.widget.TextView;
 import android.os.CountDownTimer;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+
+import espol.poo.proyectopoo.R;
+
 public class DeepWorkActivity extends AppCompatActivity {
 
     private TextView txtTimer;

@@ -18,6 +18,10 @@
             android:name=".actividades.ListaActividades"
             android:exported="false" />
         <activity
+            android:name=".actividades.PomodoroActivity"
+            android:exported="false">
+        </activity>
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
