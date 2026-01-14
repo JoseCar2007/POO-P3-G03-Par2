@@ -11,15 +11,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import espol.poo.proyectopoo.R;
 import espol.poo.proyectopoo.modelo.Actividad;
 import espol.poo.proyectopoo.modelo.ActividadAcademica;
+import espol.poo.proyectopoo.modelo.TecnicasEnfoque;
 
 public class PomodoroActivity extends AppCompatActivity {
 
     private TextView txtTimer, txtActividad;
-    private Button btnIniciar, btnPausar, btnReiniciar;
+    private ActividadAcademica a;
     private CountDownTimer timer;
     private long tiempoRestante = 25 * 60 * 1000;
     private boolean corriendo = false;
     private int tiempoActual;
+    private boolean primerCiclo = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +31,7 @@ public class PomodoroActivity extends AppCompatActivity {
         txtTimer = findViewById(R.id.txtTimer);
         txtActividad = findViewById(R.id.txtActividad);
         Intent i = getIntent();
-        ActividadAcademica a = (ActividadAcademica) i.getSerializableExtra("ObjetoActividad");
+        a = (ActividadAcademica) i.getSerializableExtra("ObjetoActividad");
         txtActividad.setText("Actividad: " + a.getNombre());
 
         actualizarTimer();
@@ -66,11 +68,18 @@ public class PomodoroActivity extends AppCompatActivity {
                 //  AQUÍ REGISTRAS LA SESIÓN EN EL HISTORIAL
                 Toast.makeText(PomodoroActivity.this,
                         "Ciclo Pomodoro registrado", Toast.LENGTH_SHORT).show();
+
+                if(primerCiclo){
+                    primerCiclo = false;
+                    a.registrarTecnicaEnfoque(new TecnicasEnfoque("Pomodoro", tiempoActual, 5,1));
+                }
+                else{
+                    a.getTecnicas().getLast().setCiclos(a.getTecnicas().getLast().getCiclos() + 1);
+                }
             }
         }.start();
         corriendo = true;
     }
-
     public void pausar(View v) {
         if (corriendo) {
             timer.cancel();

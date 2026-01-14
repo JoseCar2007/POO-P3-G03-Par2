@@ -24,13 +24,17 @@ public class TecnicasEnfoque implements Serializable {
         ciclos = c; 
         establecerFecha();
     }
-
     private void establecerFecha(){
         LocalDateTime currentTime = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");  //Ya definido dia-mes-año
         fechaSesion = currentTime.format(formatter);
     }
-
+    public void setCiclos(int ciclos){
+        this.ciclos = ciclos;
+    }
+    public int getCiclos(){
+        return ciclos;
+    }
     public String[] devolverInfo(){
         String[] retornable = {fechaSesion, tecnica, String.valueOf(duracionTrabajo)};
         return retornable;

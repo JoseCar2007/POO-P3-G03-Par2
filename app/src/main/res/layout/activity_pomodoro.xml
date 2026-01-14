@@ -58,7 +58,6 @@
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
                     android:layout_weight="1"
                     android:onClick="ciclo5"
                     android:text="5 min" />
@@ -66,16 +65,13 @@
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
                     android:layout_weight="1"
                     android:onClick="ciclo15"
-                    android:text="15 min"
-                    android:layout_marginEnd=""/>
+                    android:text="15 min" />
 
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
                     android:layout_weight="1"
                     android:onClick="ciclo10"
                     android:text="10 seg" />

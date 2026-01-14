@@ -106,14 +106,16 @@ public class AdaptadorItemActividad extends RecyclerView.Adapter<AdaptadorItemAc
                 @Override
                 public void onClick(View v) {
                     Intent intento = new Intent(context, PomodoroActivity.class);
-                    intento.putExtra("ObjetoActividad", (ActividadAcademica) ac);
+                    intento.putExtra("ObjetoActividad",  ac);
                     context.startActivity(intento);
                 }
             });
             itemView.findViewById(R.id.btnDeepWork).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.d("DEBUG: ", "Deep Work de actividad con id " + ac.getId());
+                    Intent intento = new Intent(context, DeepWorkActivity.class);
+                    intento.putExtra("ObjetoActividad", ac);
+                    context.startActivity(intento);
                 }
             });
         }
