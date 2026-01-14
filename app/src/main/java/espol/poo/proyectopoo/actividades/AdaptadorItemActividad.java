@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -54,12 +55,56 @@ public class AdaptadorItemActividad extends RecyclerView.Adapter<AdaptadorItemAc
 
     @Override
     public void onBindViewHolder(@NonNull AdaptadorItemActividad.ItemViewHolder holder, int position) {
-        holder.id.setText(String.valueOf(listaActividades.get(position).getId()));
-        holder.nombre.setText(listaActividades.get(position).getNombre());
-        holder.fecha.setText(listaActividades.get(position).getFecha());
-        holder.prioridad.setText(listaActividades.get(position).getPrioridad());
-        holder.avance.setText(listaActividades.get(position).getAvance() + "%");
+        Actividad ac = listaActividades.get(position);
+        holder.id.setText(String.valueOf(ac.getId()));
+        holder.nombre.setText(ac.getNombre());
+        holder.fecha.setText(ac.getFecha());
+        holder.prioridad.setText(ac.getPrioridad());
+        holder.avance.setText(ac.getAvance() + "%");
         holder.ac = listaActividades.get(position);
+        holder.btnDetalles.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intento = new Intent(context, PantallaDetalles.class);
+                intento.putExtra("ObjetoActividad: ", ac);
+                context.startActivity(intento);
+            }
+        });
+        holder.btnAvance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intento = new Intent(context, RegistrarAvance.class);
+                intento.putExtra("ObjetoActividad", ac);
+                context.startActivity(intento);
+                notifyItemChanged(position);
+            }
+        });
+        holder.btnEliminar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("DEBUG: ", "Eliminacion de actividad con id " + ac.getId());
+            }
+        });
+        if(holder instanceof AcademicaViewHolder){
+            AcademicaViewHolder acHolder = (AcademicaViewHolder) holder;
+            acHolder.btnDeepWork.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intento = new Intent(context, DeepWorkActivity.class);
+                    intento.putExtra("ObjetoActividad", ac);
+                    context.startActivity(intento);
+                }
+            });
+            acHolder.btnPomodoro.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intento = new Intent(context, PomodoroActivity.class);
+                    intento.putExtra("ObjetoActividad",  ac);
+                    context.startActivity(intento);
+                }
+            });
+
+        }
     }
 
     @Override
@@ -69,6 +114,7 @@ public class AdaptadorItemActividad extends RecyclerView.Adapter<AdaptadorItemAc
     public static class ItemViewHolder extends RecyclerView.ViewHolder{
         TextView id, nombre, fecha, prioridad, avance;
         Actividad ac;
+        Button btnAvance, btnEliminar, btnDetalles;
         public ItemViewHolder(@NonNull View itemView, Context context) {
             super(itemView);
             id = itemView.findViewById(R.id.itId);
@@ -76,48 +122,18 @@ public class AdaptadorItemActividad extends RecyclerView.Adapter<AdaptadorItemAc
             fecha = itemView.findViewById(R.id.itFecha);
             prioridad = itemView.findViewById(R.id.itPrioridad);
             avance = itemView.findViewById(R.id.itAvance);
-            itemView.findViewById(R.id.btnDetalles).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Log.d("DEBUG: ", "Detalles de actividad con id " + ac.getId());
-                    Intent intento = new Intent(context, PantallaDetalles.class);
-                    intento.putExtra("ObjetoActividad: ", ac);
-                    context.startActivity(intento);
-                }
-            });
-            itemView.findViewById(R.id.btnAvance).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Log.d("DEBUG: ", "Avance de actividad con id " + ac.getId() + ": " + ac.getAvance() + "%");
-                }
-            });
-            itemView.findViewById(R.id.btnEliminar).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Log.d("DEBUG: ", "Eliminacion de actividad con id " + ac.getId());
-                }
-            });
+            btnAvance = itemView.findViewById(R.id.btnAvance);
+            btnDetalles = itemView.findViewById(R.id.btnDetalles);
+            btnEliminar = itemView.findViewById(R.id.btnEliminar);
+
         }
     }
     public static class AcademicaViewHolder extends ItemViewHolder{
+        Button btnPomodoro, btnDeepWork;
         public AcademicaViewHolder(@NonNull View itemView, Context context) {
             super(itemView, context);
-            itemView.findViewById(R.id.btnPomodoro).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intento = new Intent(context, PomodoroActivity.class);
-                    intento.putExtra("ObjetoActividad",  ac);
-                    context.startActivity(intento);
-                }
-            });
-            itemView.findViewById(R.id.btnDeepWork).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intento = new Intent(context, DeepWorkActivity.class);
-                    intento.putExtra("ObjetoActividad", ac);
-                    context.startActivity(intento);
-                }
-            });
+            btnPomodoro = itemView.findViewById(R.id.btnPomodoro);
+            btnDeepWork = itemView.findViewById(R.id.btnDeepWork);
         }
     }
 

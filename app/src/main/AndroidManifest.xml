@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProyectoPoo">
         <activity
+            android:name=".actividades.RegistrarAvance"
+            android:exported="false" />
+        <activity
             android:name=".actividades.PantallaDetalles"
             android:exported="false" />
         <activity
@@ -19,8 +22,7 @@
             android:exported="false" />
         <activity
             android:name=".actividades.PomodoroActivity"
-            android:exported="false">
-        </activity>
+            android:exported="false"></activity>
         <activity
             android:name=".MainActivity"
             android:exported="true">
