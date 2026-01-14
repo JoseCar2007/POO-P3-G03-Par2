@@ -1,4 +1,5 @@
 package espol.poo.proyectopoo.actividades;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -8,10 +9,12 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import espol.poo.proyectopoo.R;
+import espol.poo.proyectopoo.modelo.Actividad;
+import espol.poo.proyectopoo.modelo.ActividadAcademica;
 
 public class PomodoroActivity extends AppCompatActivity {
 
-    private TextView txtTimer;
+    private TextView txtTimer, txtActividad;
     private Button btnIniciar, btnPausar, btnReiniciar;
     private CountDownTimer timer;
     private long tiempoRestante = 25 * 60 * 1000;
@@ -24,6 +27,11 @@ public class PomodoroActivity extends AppCompatActivity {
         setContentView(R.layout.activity_pomodoro);
 
         txtTimer = findViewById(R.id.txtTimer);
+        txtActividad = findViewById(R.id.txtActividad);
+        Intent i = getIntent();
+        ActividadAcademica a = (ActividadAcademica) i.getSerializableExtra("ObjetoActividad");
+        txtActividad.setText("Actividad: " + a.getNombre());
+
         actualizarTimer();
 
     }
@@ -35,6 +43,11 @@ public class PomodoroActivity extends AppCompatActivity {
     public void ciclo5(View v){
         tiempoRestante = 5 * 60 * 1000;
         tiempoActual = 5;
+        actualizarTimer();
+    }
+    public void ciclo10(View v) {
+        tiempoRestante = 10 * 1000;
+        tiempoActual = 10;
         actualizarTimer();
     }
     public void ciclo15(View v) {

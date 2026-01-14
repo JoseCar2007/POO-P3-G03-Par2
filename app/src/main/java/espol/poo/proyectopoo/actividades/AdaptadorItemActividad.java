@@ -106,6 +106,7 @@ public class AdaptadorItemActividad extends RecyclerView.Adapter<AdaptadorItemAc
                 @Override
                 public void onClick(View v) {
                     Intent intento = new Intent(context, PomodoroActivity.class);
+                    intento.putExtra("ObjetoActividad", (ActividadAcademica) ac);
                     context.startActivity(intento);
                 }
             });

@@ -43,30 +43,42 @@
 
 
             <LinearLayout
-                android:orientation="horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp">
+                android:layout_marginBottom="16dp"
+                android:orientation="horizontal">
 
                 <Button
-                    android:text="25 min"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:onClick="ciclo25"/>
+                    android:layout_weight="1"
+                    android:onClick="ciclo25"
+                    android:text="25 min" />
 
                 <Button
-                    android:text="5 min"
-                    android:layout_marginStart="8dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:onClick="ciclo5"/>
+
+                    android:layout_weight="1"
+                    android:onClick="ciclo5"
+                    android:text="5 min" />
 
                 <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_weight="1"
+                    android:onClick="ciclo15"
                     android:text="15 min"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd=""/>
+
+                <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:onClick="ciclo15"/>
+
+                    android:layout_weight="1"
+                    android:onClick="ciclo10"
+                    android:text="10 seg" />
             </LinearLayout>
 
             <TextView
