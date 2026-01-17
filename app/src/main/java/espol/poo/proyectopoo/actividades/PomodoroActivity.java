@@ -20,7 +20,7 @@ public class PomodoroActivity extends AppCompatActivity {
     private CountDownTimer timer;
     private long tiempoRestante = 25 * 60 * 1000;
     private boolean corriendo = false;
-    private int tiempoActual;
+    private int tiempoActual = 25;
     private boolean primerCiclo = true;
 
     @Override
@@ -35,7 +35,10 @@ public class PomodoroActivity extends AppCompatActivity {
         txtActividad.setText("Actividad: " + a.getNombre());
 
         actualizarTimer();
-
+        findViewById(R.id.btnRegresar).setOnClickListener(v -> {
+            reiniciar(null);
+            finish();
+        });
     }
     public void ciclo25(View v) {
         tiempoRestante = 25 * 60 * 1000;

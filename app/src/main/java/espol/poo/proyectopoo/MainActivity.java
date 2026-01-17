@@ -11,6 +11,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import espol.poo.proyectopoo.actividades.ListaActividades;
 import espol.poo.proyectopoo.actividades.PantallaDetalles;
+import espol.poo.proyectopoo.modelo.Actividad;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
+        Actividad.setData();
         Intent inte = new Intent(this, ListaActividades.class);
         //Intent inte = new Intent(this, PantallaDetalles.class);
         startActivity(inte);

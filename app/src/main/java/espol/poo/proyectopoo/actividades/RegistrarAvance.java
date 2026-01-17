@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,16 +30,18 @@ public class RegistrarAvance extends AppCompatActivity {
             return insets;
         });
         Intent i = this.getIntent();
-        Actividad a = (Actividad) i.getSerializableExtra("ObjetoActividad");
-        ((TextView) findViewById(R.id.id)).setText(String.valueOf(String.valueOf(a.getId())));
-        ((TextView) findViewById(R.id.nombre)).setText(a.getNombre());
+        int pos = i.getIntExtra("Posicion", 0);
+        ((TextView) findViewById(R.id.id)).setText(String.valueOf(String.valueOf(Actividad.getActividades().get(pos).getId())));
+        ((TextView) findViewById(R.id.nombre)).setText(Actividad.getActividades().get(pos).getNombre());
+        ((TextView) findViewById(R.id.avance)).setText(String.valueOf(Actividad.getActividades().get(pos).getAvance() + "%"));
         ((Button) findViewById(R.id.btnGuardar)).setOnClickListener(v -> {
             Dialog d = new Dialog(this);
             d.setContentView(R.layout.advertencia_avance);
             d.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             d.setCancelable(false);
             d.findViewById(R.id.btnSi).setOnClickListener(view -> {
-                a.setAvance(Integer.parseInt(((TextView) findViewById(R.id.avanceInput)).getText().toString()));
+                Actividad.getActividades().get(pos).setAvance(Integer.parseInt(((TextView) findViewById(R.id.avanceInput)).getText().toString()));
+                Toast.makeText(this, "Avance registrado a " + Actividad.getActividades().get(pos).getAvance(), Toast.LENGTH_SHORT).show();
                 d.dismiss();
                 finish();
             });

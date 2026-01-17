@@ -31,7 +31,7 @@ public class PantallaDetalles extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         if(extras != null){
-            Actividad ac = (Actividad) extras.getSerializable("ObjetoActividad: ");
+            Actividad ac = (Actividad) extras.getSerializable("ObjetoActividad");
             ((TextView) findViewById(R.id.tituloDetalles)).setText("DETALLES DE LA ACTIVIDAD (ID"+ac.getId()+")");
             if(ac instanceof ActividadAcademica){
                 View tarjetaDetalles = i.inflate(R.layout.item_detalles_texto_academica, parent, true);
@@ -48,7 +48,7 @@ public class PantallaDetalles extends AppCompatActivity {
         }
 
     }
-    public void volverListado(){
+    public void volverListado(View v){
         finish();
     }
     private void setDetallesAcademica(View tarjetaDetalles, ActividadAcademica ac){

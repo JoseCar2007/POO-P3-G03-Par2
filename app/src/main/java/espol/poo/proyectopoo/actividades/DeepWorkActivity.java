@@ -3,6 +3,7 @@ package espol.poo.proyectopoo.actividades;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.os.CountDownTimer;
 import android.widget.Toast;
@@ -32,20 +33,22 @@ public class DeepWorkActivity extends AppCompatActivity {
         a = (ActividadAcademica) i.getSerializableExtra("ObjetoActividad");
         txtActividad.setText("Actividad: " + a.getNombre());
         actualizar();
-
+        ((Button) findViewById(R.id.btnRegreso)).setOnClickListener(v -> {
+            finish();
+        });
     }
     public void set45(View v) {
-        tiempoRestante = 45 * 60 * 1;
+        tiempoRestante = 45 * 60 * 1000;
         tiempoActual = 45;
         actualizar();
     }
     public void set60(View v){
-        tiempoRestante = 60 * 60 * 1;
+        tiempoRestante = 60 * 60 * 1000;
         tiempoActual = 60;
         actualizar();
     }
     public void set90(View v) {
-        tiempoRestante = 90 * 60 * 1;
+        tiempoRestante = 90 * 60 * 1000;
         tiempoActual = 90;
         actualizar();
     }

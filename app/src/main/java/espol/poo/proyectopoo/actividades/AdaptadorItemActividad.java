@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -66,7 +68,7 @@ public class AdaptadorItemActividad extends RecyclerView.Adapter<AdaptadorItemAc
             @Override
             public void onClick(View v) {
                 Intent intento = new Intent(context, PantallaDetalles.class);
-                intento.putExtra("ObjetoActividad: ", ac);
+                intento.putExtra("ObjetoActividad", ac);
                 context.startActivity(intento);
             }
         });
@@ -74,7 +76,7 @@ public class AdaptadorItemActividad extends RecyclerView.Adapter<AdaptadorItemAc
             @Override
             public void onClick(View v) {
                 Intent intento = new Intent(context, RegistrarAvance.class);
-                intento.putExtra("ObjetoActividad", ac);
+                intento.putExtra("Posicion", position);
                 context.startActivity(intento);
                 notifyItemChanged(position);
             }
@@ -136,6 +138,4 @@ public class AdaptadorItemActividad extends RecyclerView.Adapter<AdaptadorItemAc
             btnDeepWork = itemView.findViewById(R.id.btnDeepWork);
         }
     }
-
-
 }

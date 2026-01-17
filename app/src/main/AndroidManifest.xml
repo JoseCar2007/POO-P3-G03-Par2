@@ -22,7 +22,13 @@
             android:exported="false" />
         <activity
             android:name=".actividades.PomodoroActivity"
-            android:exported="false"></activity>
+            android:exported="false">
+
+        </activity>
+        <activity
+            android:name=".actividades.DeepWorkActivity"
+            android:exported="false">
+        </activity>
         <activity
             android:name=".MainActivity"
             android:exported="true">

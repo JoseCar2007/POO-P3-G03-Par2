@@ -2,6 +2,7 @@ package espol.poo.proyectopoo.actividades;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -17,13 +18,7 @@ import espol.poo.proyectopoo.modelo.tipoActividad;
 import espol.poo.proyectopoo.modelo.TecnicasEnfoque;
 import java.util.ArrayList;
 public class ListaActividades extends AppCompatActivity {
-    ArrayList<Actividad> lactividades = new ArrayList<>();
-    int[] lid = {1,2,3};
-    String[] lnombre = {"Actividad 1", "Actividad 2", "Actividad 3"};
-
-    String[] lfecha = {"2026-01-01", "2026-01-02", "2026-01-03"};
-    String[] lprioridad = {"Alta", "Media", "Baja"};
-    int[] lavance = {10, 20, 30};
+    AdaptadorItemActividad adaptador;
 
     RecyclerView rv1;
     @Override
@@ -31,24 +26,17 @@ public class ListaActividades extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_actividades);
         rv1 = findViewById(R.id.rvItemAc);
-        setData();
-        AdaptadorItemActividad adaptador = new AdaptadorItemActividad(this, lactividades);
+        adaptador = new AdaptadorItemActividad(this, Actividad.getActividades());
         rv1.setAdapter(adaptador);
         rv1.setLayoutManager(new LinearLayoutManager(this));
     }
 
-    private void setData(){
-        for(int i=0; i<3; i++){
-            Actividad a = new ActividadAcademica(lnombre[i], lfecha[i], 30 + i, "Tarea de id: " + i, lprioridad[i], "POO", lavance[i], tipoActividad.TAREA, "En curso");
-            lactividades.add(a);
-        }
-        lactividades.add(new ActividadPersonal("Ir al doctor", "2026-01-01", 2, "Tarea de ejemplo", "Alta", 0, "Omni hospital", tipoActividad.PERSONAL));
-        lactividades.add(new ActividadAcademica("Examen Quimica", "2026-01-01", 2, "Repasar capitulos 3 y 4", "Alta", "Quimica", 0, tipoActividad.PROYECTO, "En curso"));
-        for(int i=0; i<4;i++){
-            ((ActividadAcademica) lactividades.get(4)).registrarTecnicaEnfoque(new TecnicasEnfoque("Pomodoro", 25, 5, 4));
-        }
-        ((ActividadAcademica) lactividades.get(4)).registrarTecnicaEnfoque(new TecnicasEnfoque("DeepWork", 90, 0, 1));
+    @Override
+    public void onResume(){
+        super.onResume();
+        Log.d("DEBUG","onResume ejecutado");
+        Log.d("DEBUG","Avance de actividad uno: " + ((ActividadAcademica) Actividad.getActividades().get(0)).getAvance() + "%");
+        adaptador.notifyDataSetChanged();
     }
-
 
 }
