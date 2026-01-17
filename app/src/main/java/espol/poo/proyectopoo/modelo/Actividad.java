@@ -3,7 +3,7 @@ package espol.poo.proyectopoo.modelo;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Actividad implements Serializable {
+public class Actividad implements Serializable, Comparable<Actividad> {
     protected int id;
     private static int idSetter = 1;
     protected String nombre;
@@ -14,7 +14,7 @@ public class Actividad implements Serializable {
     protected int avance;
     private static ArrayList<Actividad> actividades = new ArrayList<>();
     protected tipoActividad tipo;
-
+    private static String filtroOrdenamiento;
     public Actividad(String nombre, String fecha, int tiempoEstimado, String descripcion, String prioridad, int avance, tipoActividad tipo){
         this.id = idSetter;
         idSetter++;
@@ -47,6 +47,9 @@ public class Actividad implements Serializable {
     public void setAvance(int a){
         this.avance = a < 100 ? a : 100;
     }
+    public static void setFiltroOrdenamiento(String filtro){
+        filtroOrdenamiento = filtro;
+    }
 
     public static void setData(){
         String[] lnombre = {"Actividad 1", "Actividad 2", "Actividad 3"};
@@ -74,4 +77,17 @@ public class Actividad implements Serializable {
     public static void removerActividad(Actividad a){
         actividades.remove(a);
     }
+    public int compareTo(Actividad a){
+        if(filtroOrdenamiento == null) return 0;
+        switch (filtroOrdenamiento) {
+            case "Nombre":
+                return this.nombre.compareTo(a.nombre);
+            case "Fecha":
+                return a.fecha.compareTo(this.fecha);
+            case "Avance":
+                return a.avance - this.avance;
+        }
+        return 0;
+    }
+
 }
