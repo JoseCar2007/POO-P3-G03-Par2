@@ -30,7 +30,8 @@ public class DeepWorkActivity extends AppCompatActivity {
         txtTimer = findViewById(R.id.txtTimerDW);
         txtActividad = findViewById(R.id.txtActividad);
         Intent i = getIntent();
-        a = (ActividadAcademica) i.getSerializableExtra("ObjetoActividad");
+        int pos = i.getIntExtra("Posicion", 0);
+        a = (ActividadAcademica) Actividad.getActividades().get(pos);
         txtActividad.setText("Actividad: " + a.getNombre());
         actualizar();
         ((Button) findViewById(R.id.btnRegreso)).setOnClickListener(v -> {

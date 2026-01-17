@@ -13,7 +13,8 @@ public class Actividad implements Serializable {
     protected String prioridad;
     protected int avance;
     private static ArrayList<Actividad> actividades = new ArrayList<>();
-    protected tipoActividad tipo; 
+    protected tipoActividad tipo;
+
     public Actividad(String nombre, String fecha, int tiempoEstimado, String descripcion, String prioridad, int avance, tipoActividad tipo){
         this.id = idSetter;
         idSetter++;
@@ -25,6 +26,7 @@ public class Actividad implements Serializable {
         this.avance = avance;
         this.tipo = tipo;
     }
+
     public int getId(){
         return id;
     }
@@ -46,27 +48,6 @@ public class Actividad implements Serializable {
         this.avance = a < 100 ? a : 100;
     }
 
-
-    /*
-        Devolver información general dependiendo el caso de uso
-        modo 2: Se usa para el apartado de tabla de avances
-        modo 3: se usa para el aparatado de tabla en eliminar actividad y registro de tecnicas de enfoque
-        modo por defecto: se usa para el apartado de tabla general
-    */
-    public String[] devolverInfo(int modo){
-        if(modo == 2){
-            String[] retornable = {String.valueOf(id), tipo.toString(), nombre, String.valueOf(avance) + "%"};
-            return retornable;
-        }
-        else if(modo == 3){
-            String[] retornable = {String.valueOf(id), tipo.toString(), nombre};
-            return retornable;
-        }
-        else{
-            String[] retornable = {String.valueOf(id), tipo.toString(), nombre, fecha, prioridad, String.valueOf(avance)+ "%"};
-            return retornable;
-        }
-    }
     public static void setData(){
         String[] lnombre = {"Actividad 1", "Actividad 2", "Actividad 3"};
 
@@ -89,5 +70,8 @@ public class Actividad implements Serializable {
     }
     public static void añadirActividad(Actividad a){
         actividades.add(a);
+    }
+    public static void removerActividad(Actividad a){
+        actividades.remove(a);
     }
 }

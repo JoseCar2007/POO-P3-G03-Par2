@@ -1,8 +1,10 @@
 package espol.poo.proyectopoo.actividades;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -29,6 +31,10 @@ public class ListaActividades extends AppCompatActivity {
         adaptador = new AdaptadorItemActividad(this, Actividad.getActividades());
         rv1.setAdapter(adaptador);
         rv1.setLayoutManager(new LinearLayoutManager(this));
+        ((Button) findViewById(R.id.btnAgrearAc)).setOnClickListener(v -> {
+            Intent inte = new Intent(this, CrearActividad.class);
+            startActivity(inte);
+        });
     }
 
     @Override

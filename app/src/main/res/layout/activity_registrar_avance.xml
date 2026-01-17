@@ -127,7 +127,7 @@
                     android:ems="10"
                     android:inputType="number"
                     android:paddingLeft="4dp"
-                    android:text="Ej: 25"
+                    android:hint="Ej: 25"
                     android:textSize="14sp" />
 
                 <LinearLayout

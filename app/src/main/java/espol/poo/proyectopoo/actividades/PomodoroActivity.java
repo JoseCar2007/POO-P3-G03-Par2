@@ -31,7 +31,8 @@ public class PomodoroActivity extends AppCompatActivity {
         txtTimer = findViewById(R.id.txtTimer);
         txtActividad = findViewById(R.id.txtActividad);
         Intent i = getIntent();
-        a = (ActividadAcademica) i.getSerializableExtra("ObjetoActividad");
+        int pos = i.getIntExtra("Posicion",0);
+        a = (ActividadAcademica) Actividad.getActividades().get(pos);
         txtActividad.setText("Actividad: " + a.getNombre());
 
         actualizarTimer();

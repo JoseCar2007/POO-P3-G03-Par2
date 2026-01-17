@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -72,19 +73,25 @@ public class AdaptadorItemActividad extends RecyclerView.Adapter<AdaptadorItemAc
                 context.startActivity(intento);
             }
         });
-        holder.btnAvance.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intento = new Intent(context, RegistrarAvance.class);
-                intento.putExtra("Posicion", position);
-                context.startActivity(intento);
-                notifyItemChanged(position);
-            }
-        });
+        if(ac.getAvance() != 100) {
+            holder.btnAvance.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intento = new Intent(context, RegistrarAvance.class);
+                    intento.putExtra("Posicion", position);
+                    context.startActivity(intento);
+                    notifyItemChanged(position);
+                }
+            });
+        }
+        else{
+            holder.parent.removeView(holder.btnAvance);
+        }
         holder.btnEliminar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("DEBUG: ", "Eliminacion de actividad con id " + ac.getId());
+                Actividad.removerActividad(ac);
+                notifyItemRemoved(position);
             }
         });
         if(holder instanceof AcademicaViewHolder){
@@ -93,7 +100,7 @@ public class AdaptadorItemActividad extends RecyclerView.Adapter<AdaptadorItemAc
                 @Override
                 public void onClick(View v) {
                     Intent intento = new Intent(context, DeepWorkActivity.class);
-                    intento.putExtra("ObjetoActividad", ac);
+                    intento.putExtra("Posicion", position);
                     context.startActivity(intento);
                 }
             });
@@ -101,7 +108,7 @@ public class AdaptadorItemActividad extends RecyclerView.Adapter<AdaptadorItemAc
                 @Override
                 public void onClick(View v) {
                     Intent intento = new Intent(context, PomodoroActivity.class);
-                    intento.putExtra("ObjetoActividad",  ac);
+                    intento.putExtra("Posicion",  position);
                     context.startActivity(intento);
                 }
             });
@@ -114,6 +121,7 @@ public class AdaptadorItemActividad extends RecyclerView.Adapter<AdaptadorItemAc
         return listaActividades.size();
     }
     public static class ItemViewHolder extends RecyclerView.ViewHolder{
+        LinearLayout parent;
         TextView id, nombre, fecha, prioridad, avance;
         Actividad ac;
         Button btnAvance, btnEliminar, btnDetalles;
@@ -127,7 +135,7 @@ public class AdaptadorItemActividad extends RecyclerView.Adapter<AdaptadorItemAc
             btnAvance = itemView.findViewById(R.id.btnAvance);
             btnDetalles = itemView.findViewById(R.id.btnDetalles);
             btnEliminar = itemView.findViewById(R.id.btnEliminar);
-
+            parent = itemView.findViewById(R.id.btnLayout);
         }
     }
     public static class AcademicaViewHolder extends ItemViewHolder{
