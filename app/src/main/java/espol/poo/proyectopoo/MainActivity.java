@@ -1,54 +1,61 @@
 package espol.poo.proyectopoo;
 
-import android.os.Bundle;
-
-import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-
-import espol.poo.proyectopoo.R;
-import espol.poo.proyectopoo.actividades.JuegoMemoriaInicioActivity;
-import espol.poo.proyectopoo.actividades.JuegoMemoriaActivity;
-import espol.poo.proyectopoo.actividades.ListaActividades;
-import espol.poo.proyectopoo.modelo.Actividad;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
-
 import androidx.appcompat.app.AppCompatActivity;
+
+// Importaciones de tus actividades (asegúrate de que existan)
+import espol.poo.proyectopoo.actividades.JuegoMemoriaInicioActivity;
+import espol.poo.proyectopoo.modelo.Actividad;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button btnActividades, btnHidratacion, btnJuegoMemoria, btnSalir;
+    // Declaración de variables para los botones
+    Button btnActividades, btnHidratacion, btnSostenibilidad, btnJuegoMemoria, btnSalir;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main); //
-        Actividad.setData();
+        setContentView(R.layout.activity_main);
+
+        // Inicialización de datos (si es necesario para tu grupo)
+        // Actividad.setData();
+
+        // Enlace de los componentes visuales con las variables
         btnActividades = findViewById(R.id.btnActividades);
         btnHidratacion = findViewById(R.id.btnHidratacion);
+        btnSostenibilidad = findViewById(R.id.btnSostenibilidad);
         btnJuegoMemoria = findViewById(R.id.btnJuegoMemoria);
         btnSalir = findViewById(R.id.btnSalir);
 
         btnActividades.setOnClickListener(v -> {
-            Intent i = new Intent(this, ListaActividades.class);
-            startActivity(i);
+            // TODO - Descomentar cuando esté lista la clase ListaActividades
+            // Intent i = new Intent(this, ListaActividades.class);
+            // startActivity(i);
         });
-
 
         btnHidratacion.setOnClickListener(v -> {
-            // startActivity(new Intent(this, HidratacionActivity.class));
+            // TODO - Descomentar cuando esté lista HidratacionActivity
+            // Intent i = new Intent(this, HidratacionActivity.class);
+            // startActivity(i);
         });
 
+        btnSostenibilidad.setOnClickListener(v -> {
+            // TODO - Descomentar cuando esté lista SostenibilidadActivity
+            // Intent i = new Intent(this, SostenibilidadActivity.class);
+            // startActivity(i);
+        });
+
+
+        // --- TU FUNCIONALIDAD (Juego de Memoria) ---
+        // Esta sí la dejamos activa porque es tu parte y ya funciona
         btnJuegoMemoria.setOnClickListener(v -> {
             Intent i = new Intent(this, JuegoMemoriaInicioActivity.class);
             startActivity(i);
         });
 
+        // --- BOTÓN SALIR ---
         btnSalir.setOnClickListener(v -> finish());
     }
 }

@@ -1,11 +1,14 @@
 package espol.poo.proyectopoo.actividades;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+
+import espol.poo.proyectopoo.MainActivity;
 import espol.poo.proyectopoo.R;
 import espol.poo.proyectopoo.modelo.JuegoMemoria;
 
@@ -35,6 +38,7 @@ public class JuegoMemoriaActivity extends AppCompatActivity {
 
         tvInfo = findViewById(R.id.tvInfo);
         Button btnReiniciar = findViewById(R.id.btnReiniciar);
+        Button btnVolver = findViewById(R.id.btnVolver);
 
         // Inicializar los botones del XML en el arreglo
         // Los IDs son b0, b1, ... b15
@@ -49,6 +53,16 @@ public class JuegoMemoriaActivity extends AppCompatActivity {
         }
 
         btnReiniciar.setOnClickListener(v -> iniciarJuego());
+
+        btnVolver.setOnClickListener(v -> {
+            Intent i = new Intent(this, MainActivity.class);
+
+            // Esto es una buena práctica: Limpia las pantallas anteriores
+            // para que si le das "Atrás" en el menú, no te regrese al juego.
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(i);
+            finish();
+        });
 
         iniciarJuego();
     }
