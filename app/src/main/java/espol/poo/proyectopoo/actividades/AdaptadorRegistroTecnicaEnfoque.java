@@ -15,12 +15,18 @@ import espol.poo.proyectopoo.R;
 import espol.poo.proyectopoo.modelo.TecnicasEnfoque;
 
 public class AdaptadorRegistroTecnicaEnfoque extends RecyclerView.Adapter<AdaptadorRegistroTecnicaEnfoque.TecEnfoqueViewHolder> {
+    /**
+     * @param listaTecnicas: Lista de tecnicas de enfoque
+     * @param context: Contexto de la actividad
+     *
+     * */
     private ArrayList<TecnicasEnfoque> listaTecnicas;
     Context context;
     public AdaptadorRegistroTecnicaEnfoque(Context context, ArrayList<TecnicasEnfoque> listaTecnicas){
         this.listaTecnicas = listaTecnicas;
         this.context = context;
     }
+    //Se infla el layout correspondiente a la tecnica de enfoque
     @NonNull
     @Override
     public AdaptadorRegistroTecnicaEnfoque.TecEnfoqueViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -28,7 +34,7 @@ public class AdaptadorRegistroTecnicaEnfoque extends RecyclerView.Adapter<Adapta
         View view = inflater.inflate(R.layout.tecnica_enfoque_registro, parent, false);
         return new AdaptadorRegistroTecnicaEnfoque.TecEnfoqueViewHolder(view);
     }
-
+    //Se colocan los datos de la tecnica de enfoque en el layout
     @Override
     public void onBindViewHolder(@NonNull AdaptadorRegistroTecnicaEnfoque.TecEnfoqueViewHolder holder, int position) {
         holder.fechaSesion.setText(listaTecnicas.get(position).getFecha());
@@ -40,6 +46,7 @@ public class AdaptadorRegistroTecnicaEnfoque extends RecyclerView.Adapter<Adapta
     public int getItemCount() {
         return listaTecnicas.size();
     }
+    //Clase interna para gestionar el ViewHolder de la tecnica de enfoque
     public static class TecEnfoqueViewHolder extends RecyclerView.ViewHolder {
         TextView fechaSesion, tecnicaAplicada, duracion;
         public TecEnfoqueViewHolder(@NonNull View itemView) {

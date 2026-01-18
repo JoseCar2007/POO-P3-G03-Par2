@@ -4,6 +4,13 @@ import java.util.ArrayList;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 public class RegistroSostenibilidad {
+    /**
+     * @param accionesDiarias: Lista diaria de acciones sostenibles
+     *                        realizadas por el usuario
+     * @param contadoresSemana: Contadores semanales de cada acción
+     *                         sostenible
+     * @param textosAcciones: Textos de cada acción sostenible
+     */
     private ArrayList<AccionSostenible> accionesDiarias;
     private int[] contadoresSemana = {4, 3, 5, 2};
     public RegistroSostenibilidad() {
@@ -15,6 +22,13 @@ public class RegistroSostenibilidad {
         "No utilicé envases descartables",
         "Separé y reciclé materiales"
     };
+
+    /**
+     * Metodo para registrar las acciones sostenibles realizadas
+     * por el usurio en el registro diario
+     * @param indicesSeleccionados: Lista de indices para seleccionar la
+     *                            accion sostenible realizada
+     */
     public void registrarAcciones(int[] indicesSeleccionados){
         String fechaHoy = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         accionesDiarias.clear();
@@ -32,6 +46,7 @@ public class RegistroSostenibilidad {
     public int getPuntosHoy() {
         return accionesDiarias.size(); 
     }
+    //getters que dependen de la cantidad de puntos para mostrar mensaje al usuario
     public String getMensajeDiario() {
         int puntos = getPuntosHoy();
         if (puntos == 4) return "¡Impresionante! Eres un héroe ecológico.";
@@ -51,6 +66,13 @@ public class RegistroSostenibilidad {
         return "Crítico";
     }
 
+    /**
+     * Metodo para generar el resumen de las acciones sostenibles
+     * realizadas por el usuario en la semana actual junto con los
+     * mensajes correspondientes dependendiendo de la cantidad de acciones
+     * realizadas
+     * @return
+     */
     public String generarResumenSemanal() {
         int maxDias = 0;
         for (int contador : contadoresSemana) {

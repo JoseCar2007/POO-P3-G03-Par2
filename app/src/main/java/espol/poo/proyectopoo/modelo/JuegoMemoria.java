@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class JuegoMemoria {
+    /**
+     * @param tablero: tablero del juego, 4 filas y 4 columnas de cartas
+     * @param baraja: ArrayList con las cartas de la baraja
+     *
+     */
 
     private Carta[][] tablero = new Carta[4][4];
     private ArrayList<Carta> baraja = new ArrayList<>();
@@ -13,6 +18,10 @@ public class JuegoMemoria {
         mezclarYUbicar();
     }
 
+    /**
+     * Metodo para generar la baraja de cartas
+     * @param palabras: Lista de palabras para generar las cartas
+     */
     private void generarBaraja(String[] palabras){
         for(String p : palabras){
             baraja.add(new Carta(p));
@@ -20,6 +29,9 @@ public class JuegoMemoria {
         }
     }
 
+    /**
+     * Metodo para mezclar y ubicar las cartas en el tablero
+     */
     private void mezclarYUbicar(){
         Collections.shuffle(baraja);
         int idx = 0;
@@ -52,7 +64,10 @@ public class JuegoMemoria {
         getCarta(n2).marcarEmparejada();
     }
 
-    // Tablero visible para la vista
+    /**
+     * Metodo para que se muestren las cartas que ya han sido emparejadas
+     * @return tablero con las cartas que han sido emparejadas
+     */
     public String[][] getTableroVisible(){
         String[][] visible = new String[4][4];
 
@@ -68,7 +83,13 @@ public class JuegoMemoria {
         return visible;
     }
 
-    // Posiciones
+    /**
+     * Metodo para generar las pistas de la ubicacion de las palabras
+     * para facilitar revisión :)
+     * @param palabras: Se obtienen las palabras que han sido colocadas para
+     *                encontrar sus pares
+     * @return pares: Se devuelve la lista de pares encontrados
+     */
     public String[][] generarPistas(String[] palabras){
         String[][] pares = new String[8][5];
         int k = 0;

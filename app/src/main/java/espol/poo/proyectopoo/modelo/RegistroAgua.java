@@ -6,6 +6,10 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class RegistroAgua {
+    /**
+     * @param ingestaDiaria: lista de ingresos diarios de agua
+     * @param metaDiaria: meta diaria de agua
+     */
     private ArrayList<IngestaAgua> ingestaDiaria = new ArrayList<>();
     static int metaDiaria=2500;
     private String fecha;
@@ -19,12 +23,18 @@ public class RegistroAgua {
         this.fecha = fecha;
         registrarIngesta(ml);
     }
+
+    /**
+     * Metodo para registrar una ingesta de agua
+     * con la fecha de actual en que se realizó
+     * @param cantidadMl: cantidad de agua en militros
+     */
     public void registrarIngesta(float cantidadMl){
        DateTimeFormatter tf = DateTimeFormatter.ofPattern("hh:mm a");
        String horaActual = LocalTime.now().format(tf);
        this.ingestaDiaria.add(new IngestaAgua(horaActual, cantidadMl));
     }
-
+    //getters y setters
     public void establecerMeta(int nuevaMeta){
         RegistroAgua.metaDiaria = nuevaMeta;
     }

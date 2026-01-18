@@ -1,6 +1,9 @@
 package espol.poo.proyectopoo.modelo;
 
 public class ActividadPersonal extends Actividad{
+    /**
+     * @param lugar: lugar donde se realiza la actividad
+     */
     private String lugar;
     public ActividadPersonal(String nombre, String fecha, int horasEstimadas, String descripcion, String prioridad, int avance, String lugar, tipoActividad tipo){
         super(nombre, fecha, horasEstimadas, descripcion, prioridad, avance,tipo);
@@ -8,9 +11,5 @@ public class ActividadPersonal extends Actividad{
     }
     public String getLugar(){
         return lugar;
-    }
-    public String[] devolverInfoPersonal(){
-        String[] retornable = {nombre, tipo.toString(), prioridad, fecha, String.valueOf(tiempoEstimado), lugar};
-        return retornable;
     }
 }

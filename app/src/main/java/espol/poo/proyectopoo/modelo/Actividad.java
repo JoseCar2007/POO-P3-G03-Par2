@@ -4,6 +4,22 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Actividad implements Serializable, Comparable<Actividad> {
+    /**
+     * Variables importantes para la clase Actividad
+     * @param id: identificador unico para cada actividad
+     * @param nombre: nombre de la actividad
+     * @param fecha: fecha de vencimiento de la actividad
+     * @param tiempoEstimado: tiempo estimado de la actividad
+     * @param descripcion: descripcion de la actividad
+     * @param prioridad: prioridad de la actividad
+     * @param avance: avance de la actividad
+     * @param tipo: tipo de actividad (tipo enum)
+     * @param actividades: variable estática para tener todas las actividades creadas
+     * @param filtroOrdenamiento: variable para ordenar las actividades según avance nombre o tipo
+     * @param idSetter: variable para asignar un id a cada actividad automáticamente
+     *                es estática ya que se actualiza con cada actividad creada.
+     *
+     */
     protected int id;
     private static int idSetter = 1;
     protected String nombre;
@@ -26,7 +42,7 @@ public class Actividad implements Serializable, Comparable<Actividad> {
         this.avance = avance;
         this.tipo = tipo;
     }
-
+    //getters y setters de las variables básicas
     public int getId(){
         return id;
     }
@@ -47,10 +63,19 @@ public class Actividad implements Serializable, Comparable<Actividad> {
     public void setAvance(int a){
         this.avance = a < 100 ? a : 100;
     }
+
+    /**
+     * Setter estático para definir como se van a filtrar las actividades
+     * @param filtro: filtro para ordenar actividades
+     */
     public static void setFiltroOrdenamiento(String filtro){
         filtroOrdenamiento = filtro;
     }
 
+    /**
+     * Metodo estatico para tener una lista de actividades
+     * ya creada antes de iniciar la aplicacion
+     */
     public static void setData(){
         String[] lnombre = {"Actividad 1", "Actividad 2", "Actividad 3"};
 
@@ -68,6 +93,7 @@ public class Actividad implements Serializable, Comparable<Actividad> {
         }
         ((ActividadAcademica) actividades.get(4)).registrarTecnicaEnfoque(new TecnicasEnfoque("DeepWork", 90, 0, 1));
     }
+    //Getters y setters de las variables de la actividad
     public static ArrayList<Actividad> getActividades(){
         return actividades;
     }
@@ -77,6 +103,16 @@ public class Actividad implements Serializable, Comparable<Actividad> {
     public static void removerActividad(Actividad a){
         actividades.remove(a);
     }
+
+    /**
+     *
+     * @param a el objeto a comparar
+     * @return entero que indica si el objeto es mayor o menor que
+     *         ingresado
+     * Nombre: ordenamiento A-Z
+     * Fecha: ordenamiento descendente
+     * Avance: ordenamiento descendente
+     */
     public int compareTo(Actividad a){
         if(filtroOrdenamiento == null) return 0;
         switch (filtroOrdenamiento) {

@@ -29,6 +29,7 @@ public class PantallaDetalles extends AppCompatActivity {
         LayoutInflater i = LayoutInflater.from(this);
         ViewGroup parent = findViewById(R.id.linearPDetalles);
 
+        //Obtener Extras y verficar si es una actividad academica o personal
         Bundle extras = getIntent().getExtras();
         if(extras != null){
             Actividad ac = (Actividad) extras.getSerializable("ObjetoActividad");
@@ -36,6 +37,7 @@ public class PantallaDetalles extends AppCompatActivity {
             if(ac instanceof ActividadAcademica){
                 View tarjetaDetalles = i.inflate(R.layout.item_detalles_texto_academica, parent, true);
                 setDetallesAcademica(tarjetaDetalles, (ActividadAcademica) ac);
+                //Verificar si la actividad tiene registros de tecnicas de estudio para colocar el historial
                 if(!((ActividadAcademica) ac).getTecnicas().isEmpty()){
                     View tarjetaHistorialTiempo = i.inflate(R.layout.item_historial_gestion_tiempo, parent, true);
                     setDetallesTecnicas(tarjetaHistorialTiempo, (ActividadAcademica) ac);
@@ -51,6 +53,8 @@ public class PantallaDetalles extends AppCompatActivity {
     public void volverListado(View v){
         finish();
     }
+
+    //Colocar todos los Views de una actividad academica
     private void setDetallesAcademica(View tarjetaDetalles, ActividadAcademica ac){
         ((TextView) tarjetaDetalles.findViewById(R.id.infoNombre)).setText(ac.getNombre());
         ((TextView) tarjetaDetalles.findViewById(R.id.infoTipo)).setText(ac.getTipo().toLowerCase());
@@ -61,6 +65,7 @@ public class PantallaDetalles extends AppCompatActivity {
         ((TextView) tarjetaDetalles.findViewById(R.id.infoTiempo)).setText(ac.getTiempoEstimado() + " horas");
         ((TextView) tarjetaDetalles.findViewById(R.id.infoAvance)).setText(ac.getAvance() + "%");
     }
+    //Colocar todos los Views de una actividad personal
     private void setDetallesPersonal(View tarjetaDetalles, ActividadPersonal ac){
         ((TextView) tarjetaDetalles.findViewById(R.id.infoNombre)).setText(ac.getNombre());
         ((TextView) tarjetaDetalles.findViewById(R.id.infoTipo)).setText(ac.getTipo().toLowerCase());
@@ -70,6 +75,7 @@ public class PantallaDetalles extends AppCompatActivity {
         ((TextView) tarjetaDetalles.findViewById(R.id.infoAvance)).setText(ac.getAvance() + "%");
         ((TextView) tarjetaDetalles.findViewById(R.id.infoLugar)).setText(ac.getLugar());
     }
+    //Colocar historial de gestion de tiempo
     private void setDetallesTecnicas(View tarjetaHistorialTiempo, ActividadAcademica ac){
         RecyclerView rv = tarjetaHistorialTiempo.findViewById(R.id.rvHGT);
         AdaptadorRegistroTecnicaEnfoque adaptador = new AdaptadorRegistroTecnicaEnfoque(this, ac.getTecnicas());

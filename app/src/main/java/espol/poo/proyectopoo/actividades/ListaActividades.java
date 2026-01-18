@@ -26,26 +26,41 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class ListaActividades extends AppCompatActivity {
+
     AdaptadorItemActividad adaptador;
     Spinner filtroOrden;
     String[] filtros = {"Avance", "Nombre", "Fecha"};
     RecyclerView rv1;
+    /**
+     * Metodo de ciclo de vida llamado al crear la actividad.
+     * Inicializa las vistas, configura el RecyclerView y gestiona el Spinner de ordenamiento.
+     * * @param savedInstanceState Si la actividad se está recreando a partir de un estado anterior,
+     * este es el estado.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_actividades);
+
+        // Configuración del RecyclerView y su adaptador
         rv1 = findViewById(R.id.rvItemAc);
         filtroOrden = findViewById(R.id.orden);
         adaptador = new AdaptadorItemActividad(this, Actividad.getActividades());
         rv1.setAdapter(adaptador);
         rv1.setLayoutManager(new LinearLayoutManager(this));
+
+        // Configuración del botón para ir a la pantalla de crear actividad
         ((Button) findViewById(R.id.btnAgrearAc)).setOnClickListener(v -> {
             Intent inte = new Intent(this, CrearActividad.class);
             startActivity(inte);
         });
+
+        // Configuración del Spinner para los filtros
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, filtros);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         filtroOrden.setAdapter(adapter);
+
+        // Listener para detectar cambios en la selección del Spinner
         filtroOrden.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -62,7 +77,10 @@ public class ListaActividades extends AppCompatActivity {
 
 
     }
-
+    /**
+     * Metodo de ciclo de vida llamado cuando la actividad vuelve a primer plano.
+     * Se utiliza para actualizar los datos de la lista por si hubo cambios en otras pantallas.
+     */
     @Override
     public void onResume(){
         super.onResume();

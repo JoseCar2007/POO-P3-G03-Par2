@@ -24,6 +24,15 @@ import espol.poo.proyectopoo.modelo.ActividadPersonal;
 
 import java.util.ArrayList;
 public class AdaptadorItemActividad extends RecyclerView.Adapter<AdaptadorItemActividad.ItemViewHolder>{
+    /**
+     * @param TYPE_ACADEMICA: Tipo de actividad académica
+     * @param TYPE_PERSONAL: Tipo de actividad personal
+     *                     Las dos variables anteriores sirven
+     *                     para detectar cual subclase de AdaptadorItemActividad
+     *                     estamos utilizando
+     * @param listaActividades: Lista de actividades
+     * @param context: Contexto de la actividad
+     */
     private final int TYPE_ACADEMICA = 2;
     private final int TYPE_PERSONAL = 1;
     private ArrayList<Actividad> listaActividades;
@@ -33,6 +42,12 @@ public class AdaptadorItemActividad extends RecyclerView.Adapter<AdaptadorItemAc
         this.context = context;
     }
 
+    /**
+     * Metodo para detectar cual subclase de AdaptadorItemActividad
+     * estamos utilizando
+     * @param position posicion del elemento de la lista
+     * @return devuelve el tipo de actividad a utilizar
+     */
     @Override
     public int getItemViewType(int position) {
         if (listaActividades.get(position) instanceof ActividadAcademica) {
@@ -40,6 +55,13 @@ public class AdaptadorItemActividad extends RecyclerView.Adapter<AdaptadorItemAc
         }
         return TYPE_PERSONAL;
     }
+
+    /**
+     *
+     * @param parent   El contenedor en el cual se inflará el layout del item.
+     * @param viewType Entero para verificar si inflar actividad academica o personal
+     * @return Devuelve el viewHolder correspondiente a la actividad
+     */
     @NonNull
     @Override
     public AdaptadorItemActividad.ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -56,6 +78,12 @@ public class AdaptadorItemActividad extends RecyclerView.Adapter<AdaptadorItemAc
         return new AdaptadorItemActividad.ItemViewHolder(view, context);
     }
 
+    /**
+     *
+     * @param holder   El ViewHolder con el cual se trabajará
+     * @param position la posicion en la lista del elemento con el cual
+     *                 estamos trabajando.
+     */
     @Override
     public void onBindViewHolder(@NonNull AdaptadorItemActividad.ItemViewHolder holder, int position) {
         Actividad ac = listaActividades.get(position);
@@ -65,6 +93,7 @@ public class AdaptadorItemActividad extends RecyclerView.Adapter<AdaptadorItemAc
         holder.prioridad.setText(ac.getPrioridad());
         holder.avance.setText(ac.getAvance() + "%");
         holder.ac = listaActividades.get(position);
+        //Boton para ir a la actividad de Detalles
         holder.btnDetalles.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,6 +102,8 @@ public class AdaptadorItemActividad extends RecyclerView.Adapter<AdaptadorItemAc
                 context.startActivity(intento);
             }
         });
+        //Boton para ir a la actividad de registrarAvance (esta no se muestra
+        //si la actividad tiene avance = 100
         if(ac.getAvance() != 100) {
             holder.btnAvance.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -87,6 +118,7 @@ public class AdaptadorItemActividad extends RecyclerView.Adapter<AdaptadorItemAc
         else{
             holder.parent.removeView(holder.btnAvance);
         }
+        //Boton para eliminar actividad
         holder.btnEliminar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,6 +126,8 @@ public class AdaptadorItemActividad extends RecyclerView.Adapter<AdaptadorItemAc
                 notifyItemRemoved(position);
             }
         });
+        //Si se tiene un Holder de Actividad academica se colocarán los
+        //botones de iniciar deepWork y pomodoro
         if(holder instanceof AcademicaViewHolder){
             AcademicaViewHolder acHolder = (AcademicaViewHolder) holder;
             acHolder.btnDeepWork.setOnClickListener(new View.OnClickListener() {
@@ -120,6 +154,7 @@ public class AdaptadorItemActividad extends RecyclerView.Adapter<AdaptadorItemAc
     public int getItemCount() {
         return listaActividades.size();
     }
+    //Clase interna para gestionar el ViewHolder de la actividad correspondiente
     public static class ItemViewHolder extends RecyclerView.ViewHolder{
         LinearLayout parent;
         TextView id, nombre, fecha, prioridad, avance;
@@ -138,6 +173,7 @@ public class AdaptadorItemActividad extends RecyclerView.Adapter<AdaptadorItemAc
             parent = itemView.findViewById(R.id.btnLayout);
         }
     }
+    //Subclase en caso de que se tenga una actividad academica
     public static class AcademicaViewHolder extends ItemViewHolder{
         Button btnPomodoro, btnDeepWork;
         public AcademicaViewHolder(@NonNull View itemView, Context context) {

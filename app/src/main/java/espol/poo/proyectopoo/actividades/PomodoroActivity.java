@@ -14,6 +14,16 @@ import espol.poo.proyectopoo.modelo.ActividadAcademica;
 import espol.poo.proyectopoo.modelo.TecnicasEnfoque;
 
 public class PomodoroActivity extends AppCompatActivity {
+    /**
+     * @param txtTimer: TextView para mostrar el tiempo restante
+     * @param txtActividad: TextView para mostrar la actividad
+     * @param timer: ContadorDownTimer para el tiempo restante
+     * @param tiempoRestante: Tiempo restante en milisegundos
+     * @param a: Actividad académica a la que se le va a registrar la sesión
+     * @param tiempoActual: Tiempo actual en minutos
+     * @param primerCiclo: Booleano para saber si es el primer ciclo del pomodoro
+     * @param corriendo: Booleano para saber si el timer está corriendo
+     */
 
     private TextView txtTimer, txtActividad;
     private ActividadAcademica a;
@@ -28,6 +38,7 @@ public class PomodoroActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pomodoro);
 
+        //Obtener Extras y asignar views correspondientes
         txtTimer = findViewById(R.id.txtTimer);
         txtActividad = findViewById(R.id.txtActividad);
         Intent i = getIntent();
@@ -36,6 +47,8 @@ public class PomodoroActivity extends AppCompatActivity {
         txtActividad.setText("Actividad: " + a.getNombre());
 
         actualizarTimer();
+
+        //Configurar botone para Regresar al listado
         findViewById(R.id.btnRegresar).setOnClickListener(v -> {
             reiniciar(null);
             finish();
@@ -61,6 +74,12 @@ public class PomodoroActivity extends AppCompatActivity {
         tiempoActual = 15;
         actualizarTimer();
     }
+
+    /**
+     * Metodo para iniciar la sesión de estudio
+     * @param v: View en la cual se encuentra el CounDownTimer
+     *         en esta implementacion no se usa
+     */
     public void iniciar(View v) {
         timer = new CountDownTimer(tiempoRestante, 1000) {
             public void onTick(long millisUntilFinished) {
@@ -84,6 +103,13 @@ public class PomodoroActivity extends AppCompatActivity {
         }.start();
         corriendo = true;
     }
+
+    /**
+     * Metodo para finalizar la sesión de estudio
+     * @param v: como es un metodo de un boton del layout
+     *           es necesario poner el View v para que funcione
+     *           pero en este caso no se usa
+     */
     public void pausar(View v) {
         if (corriendo) {
             timer.cancel();
@@ -91,15 +117,25 @@ public class PomodoroActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Metodo para reiniciar la sesión de estudio
+     * @param v: como es un metodo de un boton del layout
+     *           es necesario poner el View v para que funcione
+     *           pero en este caso no se usa
+     */
     public void reiniciar(View v) {
         if (timer != null) timer.cancel();
 
         if(tiempoActual == 25) tiempoRestante = 25 * 60 * 1000;
         if(tiempoActual == 5) tiempoRestante = 5 * 60 * 1000;
         if(tiempoActual == 15) tiempoRestante = 15 * 60 * 1000;
+        if(tiempoActual == 10) tiempoRestante = 10 * 1000;
         actualizarTimer();
     }
 
+    /**
+     * Metodo para actualizar el temporizador
+     */
     private void actualizarTimer() {
         int minutos = (int) (tiempoRestante / 1000) / 60;
         int segundos = (int) (tiempoRestante / 1000) % 60;

@@ -29,27 +29,38 @@ public class RegistrarAvance extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        //Obtener Extras y asignar views correspondientes
         Intent i = this.getIntent();
         int pos = i.getIntExtra("Posicion", 0);
         ((TextView) findViewById(R.id.id)).setText(String.valueOf(String.valueOf(Actividad.getActividades().get(pos).getId())));
         ((TextView) findViewById(R.id.nombre)).setText(Actividad.getActividades().get(pos).getNombre());
         ((TextView) findViewById(R.id.avance)).setText(String.valueOf(Actividad.getActividades().get(pos).getAvance() + "%"));
+
+        //Configurar boton de guardar. En este se abrirá un dialogo para registrar el avance
         ((Button) findViewById(R.id.btnGuardar)).setOnClickListener(v -> {
             Dialog d = new Dialog(this);
             d.setContentView(R.layout.advertencia_avance);
             d.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             d.setCancelable(false);
+
+            //Configurar boton de si y no del dialog
             d.findViewById(R.id.btnSi).setOnClickListener(view -> {
-                Actividad.getActividades().get(pos).setAvance(Integer.parseInt(((TextView) findViewById(R.id.avanceInput)).getText().toString()));
-                Toast.makeText(this, "Avance registrado a " + Actividad.getActividades().get(pos).getAvance(), Toast.LENGTH_SHORT).show();
-                d.dismiss();
-                finish();
+                try {
+                    Actividad.getActividades().get(pos).setAvance(Integer.parseInt(((TextView) findViewById(R.id.avanceInput)).getText().toString()));
+                    Toast.makeText(this, "Avance registrado a " + Actividad.getActividades().get(pos).getAvance(), Toast.LENGTH_SHORT).show();
+                    d.dismiss();
+                    finish();
+                }catch (NumberFormatException e){
+                    Toast.makeText(this, "Rellene todos los campos", Toast.LENGTH_SHORT).show();
+                }
             });
             d.findViewById(R.id.btnNo).setOnClickListener(view -> {
                 d.dismiss();
             });
             d.show();
         });
+        //Configurar boton de cancelar
         ((Button) findViewById(R.id.btnCancelar)).setOnClickListener(v -> {
             finish();
         });

@@ -1,6 +1,13 @@
 package espol.poo.proyectopoo.modelo;
 import java.util.ArrayList;
 public class ActividadAcademica extends Actividad{
+    /**
+     * @param asignatura: asignatura a la que pertenece la actividad
+     * @param estado: estado de la actividad (en curso, finalizada
+     *              este último se coloca cuando avance = 100)
+     * @param registroTecnicas: lista de tecnicas de enfoque de la actividad
+     *                        para construir historial de gestión de tiempo
+     */
     private String asignatura;
     private String estado;
     private ArrayList<TecnicasEnfoque> registroTecnicas = new ArrayList<>();
@@ -10,10 +17,7 @@ public class ActividadAcademica extends Actividad{
         this.asignatura = asignatura;
         this.estado = estado;
     }
-    public String[] devolverInfoAcademica(){
-        String[] retornable = {nombre, tipo.toString(), asignatura, prioridad, estado, fecha, String.valueOf(tiempoEstimado), String.valueOf(avance) + "%"};
-        return retornable;
-    }
+    //getters y setters
     public String getAsignatura(){
         return asignatura;
     }

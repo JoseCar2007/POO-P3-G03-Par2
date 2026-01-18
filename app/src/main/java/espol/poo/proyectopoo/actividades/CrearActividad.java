@@ -31,6 +31,21 @@ import espol.poo.proyectopoo.modelo.ActividadPersonal;
 import espol.poo.proyectopoo.modelo.tipoActividad;
 
 public class CrearActividad extends AppCompatActivity {
+    /**
+     * @param etNombre: EditText para ingresar el nombre de la actividad
+     * @param etFecha: EditText para ingresar la fecha de la actividad
+     * @param etTiempo: EditText para ingresar el tiempo de la actividad
+     * @param etDescripcion: EditText para ingresar la descripcion de la actividad
+     * @param etAsignatura: EditText para ingresar la asignatura de la actividad
+     * @param etLugar: EditText para ingresar el lugar de la actividad
+     * @param spinnerCategoria: Spinner para seleccionar la categoria de la actividad
+     *                        (Academico o Personal)
+     * @param spinnerPrioridad: Spinner para seleccionar la prioridad de la actividad
+     *                        (Alta, Media o Baja)
+     * @param spinnerTipo: Spinner para seleccionar el tipo de la actividad
+     *                        (Proyecto, Tarea o Examen)
+     * @param categorias: Lista de categorias de actividad
+     */
     EditText etNombre, etFecha, etTiempo, etDescripcion, etAsignatura, etLugar;
     Spinner spinnerCategoria, spinnerPrioridad, spinnerTipo;
     List<String> categorias = new ArrayList<>();
@@ -39,24 +54,36 @@ public class CrearActividad extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_crear_actividad);
-        Log.d("DEBUG", "Iniciar Crear actividad");
+
+
         LayoutInflater inflador = LayoutInflater.from(this);
+
+        //Se configura el spinner de categorias
         spinnerCategoria = findViewById(R.id.spinnerCategoria);
         String[] categorias = {"Academico", "Personal"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categorias);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerCategoria.setAdapter(adapter);
+
+        //Se configura el resto de los campos
         etNombre = findViewById(R.id.etNombre);
         etDescripcion = findViewById(R.id.etDescripcion);
         etTiempo = findViewById(R.id.etTiempo);
+
+        //Se configura el spinner de prioridades
         spinnerPrioridad = findViewById(R.id.spinnerPrioridad);
         String[] prioridades = {"Alta", "Media", "Baja"};
         ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, prioridades);
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerPrioridad.setAdapter(adapter2);
+
+        //Se configura el datePicker
         configurarDatePicker();
+
         LinearLayout layoutDinamico = (LinearLayout) findViewById(R.id.dynamicContainer);
-        Log.d("DEBUG", "Creando actividad");
+
+
+        //Se configura el listener del spinner de categorias
         spinnerCategoria.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
 
             @Override
@@ -84,34 +111,53 @@ public class CrearActividad extends AppCompatActivity {
             }
         });
 
+        //Se configura el boton de guardar
         findViewById(R.id.btnGuardar).setOnClickListener(v -> {
-            String nombre = etNombre.getText().toString();
-            String fecha = etFecha.getText().toString();
-            String desc = etDescripcion.getText().toString();
-            String prioridad = spinnerPrioridad.getSelectedItem().toString();
-            int tiempo = Integer.parseInt(etTiempo.getText().toString());
+            try {
+                //Se obtienen los datos de los campos
+                String nombre = etNombre.getText().toString();
+                String fecha = etFecha.getText().toString();
+                String desc = etDescripcion.getText().toString();
+                String prioridad = spinnerPrioridad.getSelectedItem().toString();
+                int tiempo = Integer.parseInt(etTiempo.getText().toString());
 
+                //Se valida que los campos no esten vacios
+                if (nombre.isEmpty() || fecha.isEmpty() || desc.isEmpty() || prioridad.isEmpty() || tiempo == 0) {
+                    Toast.makeText(this, "Rellene todos los campos", Toast.LENGTH_SHORT).show();
+                } else {
+                    if (etLugar != null) {
+                        //Se obtienen los datos de los campos de la actividad personal
+                        String lugar = etLugar.getText().toString();
+                        Actividad.añadirActividad(new ActividadPersonal(nombre, fecha, tiempo, desc, prioridad, 0, lugar, tipoActividad.PERSONAL));
+                        Toast.makeText(this, "Personal: Actividad añadida presione cancelar para salir", Toast.LENGTH_SHORT).show();
+                    } else if (etAsignatura != null && spinnerTipo != null) {
+                        //Se obtienen los datos de los campos de la actividad academica
+                        String asignatura = etAsignatura.getText().toString();
+                        String tipo = spinnerTipo.getSelectedItem().toString();
+                        if (!asignatura.isEmpty() && !tipo.isEmpty()) {
+                            Actividad.añadirActividad(new ActividadAcademica(nombre, fecha, tiempo, desc, prioridad, asignatura, 0, tipoActividad.valueOf(tipo), "En curso"));
+                            Toast.makeText(this, tipo + ": Actividad añadida, presione cancelar para salir", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(this, "Rellene todos los campos", Toast.LENGTH_SHORT).show();
+                        }
 
-            if(nombre.isEmpty() || fecha.isEmpty() || desc.isEmpty() || prioridad.isEmpty() || tiempo == 0){
+                    }
+                }
+            }catch(NumberFormatException e){
                 Toast.makeText(this, "Rellene todos los campos", Toast.LENGTH_SHORT).show();
             }
-            else{
-                if(etLugar != null){
-                    String lugar = etLugar.getText().toString();
-                    Actividad.añadirActividad(new ActividadPersonal(nombre, fecha, tiempo, desc, prioridad, 0, lugar, tipoActividad.PERSONAL));
-                    Toast.makeText(this, "Personal: Actividad añadida presione cancelar para salir", Toast.LENGTH_SHORT).show();
-                }
-                else if(etAsignatura != null && spinnerTipo != null) {
-                    String asignatura = etAsignatura.getText().toString();
-                    String tipo = spinnerTipo.getSelectedItem().toString();
-                    Actividad.añadirActividad(new ActividadAcademica(nombre, fecha, tiempo, desc, prioridad, asignatura, 0, tipoActividad.valueOf(tipo), "En curso" ));
-                    Toast.makeText(this, tipo + ": Actividad añadida, presione cancelar para salir", Toast.LENGTH_SHORT).show();
-                }
-            }
-
         });
+        //Se configura el boton de cancelar
         findViewById(R.id.btnCancelar).setOnClickListener(v -> finish());
     }
+
+    /**
+     * Metodo para configurar el datePicker:
+     * Un datePicker en android sirve para
+     * colocar una interfaz en la que se puede
+     * seleccionar una fecha.
+     *
+     */
     private void configurarDatePicker() {
         etFecha = findViewById(R.id.etFecha);
 
