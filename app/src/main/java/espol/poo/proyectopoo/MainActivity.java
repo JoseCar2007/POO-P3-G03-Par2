@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 // Importaciones de tus actividades (asegúrate de que existan)
 import espol.poo.proyectopoo.actividades.JuegoMemoriaInicioActivity;
+import espol.poo.proyectopoo.actividades.ListaActividades;
 import espol.poo.proyectopoo.modelo.Actividad;
 
 public class MainActivity extends AppCompatActivity {
@@ -19,8 +20,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Inicialización de datos (si es necesario para tu grupo)
-        // Actividad.setData();
+        //Inicialización de datos
+        Actividad.setData();
 
         // Enlace de los componentes visuales con las variables
         btnActividades = findViewById(R.id.btnActividades);
@@ -30,9 +31,9 @@ public class MainActivity extends AppCompatActivity {
         btnSalir = findViewById(R.id.btnSalir);
 
         btnActividades.setOnClickListener(v -> {
-            // TODO - Descomentar cuando esté lista la clase ListaActividades
-            // Intent i = new Intent(this, ListaActividades.class);
-            // startActivity(i);
+
+            Intent i = new Intent(this, ListaActividades.class);
+            startActivity(i);
         });
 
         btnHidratacion.setOnClickListener(v -> {
@@ -48,8 +49,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        // --- TU FUNCIONALIDAD (Juego de Memoria) ---
-        // Esta sí la dejamos activa porque es tu parte y ya funciona
         btnJuegoMemoria.setOnClickListener(v -> {
             Intent i = new Intent(this, JuegoMemoriaInicioActivity.class);
             startActivity(i);
