@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 
-// Importaciones de tus actividades (asegúrate de que existan)
+// Importaciones de tus actividades
 import espol.poo.proyectopoo.actividades.JuegoMemoriaInicioActivity;
 import espol.poo.proyectopoo.actividades.ListaActividades;
 import espol.poo.proyectopoo.modelo.Actividad;
@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(i);
         });
 
-        // --- BOTÓN SALIR ---
+        //  BOTÓN SALIR
         btnSalir.setOnClickListener(v -> finish());
     }
 }
