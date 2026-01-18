@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">ProyectoPoo</string>
     <string name="titulo_juego">Juego de Memoria Sostenible</string>
-    <string name="texto_stats">Intentos: 0 | Pares: 0/8</string>
+    <string name="texto_stats">Intentos: %1$d | Pares: %2$d/8</string>
     <string name="boton_reiniciar">Reiniciar Juego</string>
     <string name="menu_titulo">MENÚ PRINCIPAL</string>
     <string name="btn_actividades">Gestión de Actividades</string>
@@ -10,4 +10,6 @@
     <string name="btn_juego">Juego de Memoria</string>
     <string name="btn_salir">Salir</string>
     <string name="btn_volver_menu">Volver al Menú</string>
+    <string name="btn_ver_respuestas">👁️ Ver Respuestas (Solo Ing. Gladys)</string>
+
 </resources>

@@ -3,10 +3,13 @@ package espol.poo.proyectopoo.actividades;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
 import android.widget.Button;
+import android.widget.GridLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import espol.poo.proyectopoo.MainActivity;
 import espol.poo.proyectopoo.R;
@@ -15,19 +18,19 @@ import espol.poo.proyectopoo.modelo.JuegoMemoria;
 public class JuegoMemoriaActivity extends AppCompatActivity {
 
     private JuegoMemoria juego;
-    private Button[] botones = new Button[16];
+    private final Button[] botones = new Button[16];
     private TextView tvInfo;
+
+    private GridLayout gridRespuestas;
 
     // Variables de control del juego
     private int primeraSeleccion = -1; // -1 significa que no hay carta seleccionada
-    private boolean bloqueo = false;   // Para impedir clicks mientras el sistema "piensa"
+    private boolean bloqueo = false;   // Para impedir clicks mientras el sistema piensa
     private int intentos = 0;
     private int paresEncontrados = 0;
 
-    // Palabras relacionadas a Sostenibilidad (como pide el PDF)
-    // En JuegoMemoriaActivity.java
-    private String[] palabras = {
-            "☀️", "💧", "🌬️", "♻️",      // Solar, Agua, Aire, Reciclaje
+    private final String[] palabras = {
+            "☀️", "💧", "🌬️", "♻️",      // Sol, Agua, Aire, Reciclaje
             "🍾", "🔩", "🥤", "📄"       // Vidrio, Metal, Plástico, Papel
     };
 
@@ -40,19 +43,31 @@ public class JuegoMemoriaActivity extends AppCompatActivity {
         Button btnReiniciar = findViewById(R.id.btnReiniciar);
         Button btnVolver = findViewById(R.id.btnVolver);
 
+        Button btnTrampa = findViewById(R.id.btnTrampa);
+        gridRespuestas = findViewById(R.id.gridRespuestas);
+
         // Inicializar los botones del XML en el arreglo
         // Los IDs son b0, b1, ... b15
-        for (int i = 0; i < 16; i++) {
-            String idID = "b" + i;
-            int resID = getResources().getIdentifier(idID, "id", getPackageName());
-            botones[i] = findViewById(resID);
+        int[] idsBotones = {
+                R.id.b0, R.id.b1, R.id.b2, R.id.b3,
+                R.id.b4, R.id.b5, R.id.b6, R.id.b7,
+                R.id.b8, R.id.b9, R.id.b10, R.id.b11,
+                R.id.b12, R.id.b13, R.id.b14, R.id.b15
+        };
 
-            // Asignar el evento Click a cada botón
-            final int index = i + 1; // El modelo usa indices 1-16
+        // 2. Ciclo optimizado
+        for (int i = 0; i < idsBotones.length; i++) {
+            // Asignamos el botón usando el ID del array
+            botones[i] = findViewById(idsBotones[i]);
+
+            // Mantenemos la lógica de índices (Modelo usa 1-16, Array usa 0-15)
+            final int index = i + 1;
             botones[i].setOnClickListener(v -> manejarClick(index));
         }
 
         btnReiniciar.setOnClickListener(v -> iniciarJuego());
+
+        btnTrampa.setOnClickListener(v -> mostrarRespuestas());
 
         btnVolver.setOnClickListener(v -> {
             Intent i = new Intent(this, MainActivity.class);
@@ -81,6 +96,10 @@ public class JuegoMemoriaActivity extends AppCompatActivity {
             btn.setEnabled(true);
             btn.setAlpha(1.0f); // Opacidad completa
         }
+        if (gridRespuestas != null) {
+            gridRespuestas.removeAllViews();
+            gridRespuestas.setVisibility(View.GONE);
+        }
     }
 
     private void manejarClick(int numeroCarta) {
@@ -103,7 +122,7 @@ public class JuegoMemoriaActivity extends AppCompatActivity {
             // Es la segunda carta
             intentos++;
             actualizarTextoInfo();
-            bloqueo = true; // Bloqueamos para que no toque una 3ra carta rapido
+            bloqueo = true;
 
             if (juego.verValor(primeraSeleccion).equals(juego.verValor(numeroCarta))) {
                 // --- ¡COINCIDENCIA! ---
@@ -139,6 +158,39 @@ public class JuegoMemoriaActivity extends AppCompatActivity {
     }
 
     private void actualizarTextoInfo() {
-        tvInfo.setText("Intentos: " + intentos + " | Pares: " + paresEncontrados + "/8");
+        // getString toma la plantilla y reemplaza %1$d por 'intentos' y %2$d por 'paresEncontrados'
+        String mensaje = getString(R.string.texto_stats, intentos, paresEncontrados);
+        tvInfo.setText(mensaje);
+    }
+    private void mostrarRespuestas() {
+        // Si ya está visible, no hacemos nada
+        if (gridRespuestas.getVisibility() == View.VISIBLE) return;
+
+        gridRespuestas.removeAllViews();
+
+        for (int i = 1; i <= 16; i++) {
+            TextView tvMini = new TextView(this);
+
+            String emoji = juego.verValor(i);
+            tvMini.setText(emoji);
+
+            tvMini.setTextSize(20);
+            tvMini.setGravity(android.view.Gravity.CENTER);
+            tvMini.setBackgroundResource(R.drawable.fondo_carta); // Usamos el mismo fondo verde
+            tvMini.setTextColor(ContextCompat.getColor(this, R.color.white));
+
+            // Definimos el tamaño del cuadrito (40dp x 40dp aprox)
+            GridLayout.LayoutParams params = new GridLayout.LayoutParams();
+            params.width = 100;  // Ancho en pixeles
+            params.height = 100; // Alto en pixeles
+            params.setMargins(8, 8, 8, 8); // Separación entre cuadritos
+            tvMini.setLayoutParams(params);
+
+            // Agregamos al mini grid
+            gridRespuestas.addView(tvMini);
+        }
+
+        // Hacemos visible el grid
+        gridRespuestas.setVisibility(View.VISIBLE);
     }
 }

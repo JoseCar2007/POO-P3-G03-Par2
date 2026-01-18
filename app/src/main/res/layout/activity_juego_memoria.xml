@@ -56,21 +56,51 @@
     </GridLayout>
 
     <Button
-        android:id="@+id/btnReiniciar"
-        android:text="@string/boton_reiniciar"
-        android:layout_marginTop="20dp"
-        android:backgroundTint="@color/verde_claro"
-        android:textColor="@color/texto_blanco"
+        android:id="@+id/btnTrampa"
+        android:text="@string/btn_ver_respuestas"
+        android:backgroundTint="#FF9800"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        android:layout_marginTop="15dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
-    <Button
-        android:id="@+id/btnVolver"
-        android:text="@string/btn_volver_menu"
-        android:layout_marginTop="10dp"
-        android:backgroundTint="@color/boton_salir_rojo"
-        android:textColor="@color/white"
+    <GridLayout
+        android:id="@+id/gridRespuestas"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:columnCount="4"
+        android:rowCount="4"
+        android:visibility="gone"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp">
+    </GridLayout>
+
+    <LinearLayout
+        style="?android:attr/buttonBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnReiniciar"
+            style="?android:attr/buttonBarButtonStyle"
+            android:text="@string/boton_reiniciar"
+            android:backgroundTint="@color/verde_claro"
+            android:textColor="@color/white"
+            android:layout_marginEnd="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/btnVolver"
+            style="?android:attr/buttonBarButtonStyle"
+            android:text="@string/btn_volver_menu"
+            android:backgroundTint="@color/boton_salir_rojo"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
 
 </LinearLayout>
