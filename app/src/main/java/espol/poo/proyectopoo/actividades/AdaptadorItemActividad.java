@@ -103,8 +103,9 @@ public class AdaptadorItemActividad extends RecyclerView.Adapter<AdaptadorItemAc
             }
         });
         //Boton para ir a la actividad de registrarAvance (esta no se muestra
-        //si la actividad tiene avance = 100
+        //si la actividad tiene avance = 100)
         if(ac.getAvance() != 100) {
+            holder.btnAvance.setVisibility(View.VISIBLE);
             holder.btnAvance.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -116,7 +117,7 @@ public class AdaptadorItemActividad extends RecyclerView.Adapter<AdaptadorItemAc
             });
         }
         else{
-            holder.parent.removeView(holder.btnAvance);
+            holder.btnAvance.setVisibility(View.GONE);
         }
         //Boton para eliminar actividad
         holder.btnEliminar.setOnClickListener(new View.OnClickListener() {
