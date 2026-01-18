@@ -30,7 +30,7 @@ public class JuegoMemoriaActivity extends AppCompatActivity {
 
         juego = new JuegoMemoria(palabras);
 
-        GridLayout grid = findViewById(R.id.gridCartas);
+        GridLayout grid = findViewById(R.id.gridMemoria);
 
         for (int i = 0; i < 16; i++) {
             Button btn = new Button(this);
