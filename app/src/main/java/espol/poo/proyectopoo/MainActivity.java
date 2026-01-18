@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         btnJuegoMemoria.setOnClickListener(v -> {
-            Intent i = new Intent(this, JuegoMemoriaActivity.class);
+            Intent i = new Intent(this, JuegoMemoriaInicioActivity.class);
             startActivity(i);
         });
 
