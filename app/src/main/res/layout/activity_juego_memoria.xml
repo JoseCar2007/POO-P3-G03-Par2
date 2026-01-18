@@ -4,11 +4,11 @@
     android:layout_height="match_parent"
     android:background="@color/verde_fondo"
     android:padding="16dp"
-    android:gravity="center_horizontal"
+    android:gravity="center"
     android:orientation="vertical">
 
     <TextView
-        android:text="Juego de Memoria Sostenible"
+        android:text="@string/titulo_juego"
         android:textSize="22sp"
         android:textStyle="bold"
         android:textColor="@color/verde_oscuro"
@@ -18,7 +18,7 @@
 
     <TextView
         android:id="@+id/tvInfo"
-        android:text="Intentos: 0 | Pares: 0/8"
+        android:text="@string/texto_stats"
         android:textSize="18sp"
         android:textColor="@color/verde_oscuro"
         android:layout_marginBottom="20dp"
@@ -57,7 +57,7 @@
 
     <Button
         android:id="@+id/btnReiniciar"
-        android:text="Reiniciar Juego"
+        android:text="@string/boton_reiniciar"
         android:layout_marginTop="20dp"
         android:backgroundTint="@color/verde_claro"
         android:textColor="@color/texto_blanco"
