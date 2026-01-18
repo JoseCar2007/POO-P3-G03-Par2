@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/gridMemoria"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:columnCount="4"
+    android:rowCount="4"
+    android:padding="16dp">
+
+    <!-- 16 BOTONES -->
+    <!-- todos iguales, solo cambia el id -->
+
+    <Button android:id="@+id/b0" style="@style/Carta"/>
+    <Button android:id="@+id/b1" style="@style/Carta"/>
+    <Button android:id="@+id/b2" style="@style/Carta"/>
+    <Button android:id="@+id/b3" style="@style/Carta"/>
+
+    <Button android:id="@+id/b4" style="@style/Carta"/>
+    <Button android:id="@+id/b5" style="@style/Carta"/>
+    <Button android:id="@+id/b6" style="@style/Carta"/>
+    <Button android:id="@+id/b7" style="@style/Carta"/>
+
+    <Button android:id="@+id/b8" style="@style/Carta"/>
+    <Button android:id="@+id/b9" style="@style/Carta"/>
+    <Button android:id="@+id/b10" style="@style/Carta"/>
+    <Button android:id="@+id/b11" style="@style/Carta"/>
+
+    <Button android:id="@+id/b12" style="@style/Carta"/>
+    <Button android:id="@+id/b13" style="@style/Carta"/>
+    <Button android:id="@+id/b14" style="@style/Carta"/>
+    <Button android:id="@+id/b15" style="@style/Carta"/>
+
+</GridLayout>
