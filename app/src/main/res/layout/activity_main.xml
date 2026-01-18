@@ -21,16 +21,16 @@
         android:layout_height="wrap_content"/>
 
     <Button
-        android:id="@+id/btnTecnicas"
-        android:text="Técnicas de Enfoque"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-    <Button
         android:id="@+id/btnHidratacion"
         android:text="Control de Hidratación"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/btnSostenibilidad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Registro diario de Sostenibilidad" />
 
     <Button
         android:id="@+id/btnJuegoMemoria"
