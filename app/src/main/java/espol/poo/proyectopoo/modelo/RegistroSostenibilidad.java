@@ -11,10 +11,13 @@ public class RegistroSostenibilidad {
      *                         sostenible
      * @param textosAcciones: Textos de cada acción sostenible
      */
-    private ArrayList<AccionSostenible> accionesDiarias;
+    private static ArrayList<AccionSostenible> accionesDiarias= new ArrayList<>();
     private int[] contadoresSemana = {4, 3, 5, 2};
     public RegistroSostenibilidad() {
-        this.accionesDiarias = new ArrayList<>();
+        // El constructor ya no reinicia la lista si ya existe
+        if (accionesDiarias == null) {
+            accionesDiarias = new ArrayList<>();
+        }
     }
     private String[] textosAcciones = {
         "Usé transporte público, bicicleta o caminé",
@@ -127,5 +130,9 @@ public class RegistroSostenibilidad {
             }
         }
         return maxDias; 
+    }
+    //Para el Adapter, si se agrega otra actividad ya se veria en este
+    public int getCantidadAcciones() {
+        return textosAcciones.length;
     }
 }

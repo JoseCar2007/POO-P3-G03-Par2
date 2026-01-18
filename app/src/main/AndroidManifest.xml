@@ -36,6 +36,23 @@
             android:name=".actividades.DeepWorkActivity"
             android:exported="false" />
         <activity
+            android:name=".actividades.ActividadPrincipalHidratacion"
+            android:exported="false" />
+        <activity
+            android:name=".actividades.MetaActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".actividades.RegistrarActivityTomaAgua"
+            android:exported="false" />
+        <activity
+            android:name=".actividades.ActividadSostenibilidad"
+            android:exported="false" />
+
+        <activity
+            android:name=".actividades.RegistrarSostenibilidadActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true" >
             <intent-filter>
@@ -44,6 +61,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>

@@ -10,18 +10,13 @@ public class RegistroAgua {
      * @param ingestaDiaria: lista de ingresos diarios de agua
      * @param metaDiaria: meta diaria de agua
      */
-    private ArrayList<IngestaAgua> ingestaDiaria = new ArrayList<>();
+    private static ArrayList<IngestaAgua> ingestaDiaria = new ArrayList<>();
     static int metaDiaria=2500;
     private String fecha;
     public RegistroAgua(){
         this.ingestaDiaria = new ArrayList<>();
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         this.fecha = LocalDate.now().format(dtf);
-    }
-    public RegistroAgua(String fecha, float ml){
-        this.ingestaDiaria = new ArrayList();
-        this.fecha = fecha;
-        registrarIngesta(ml);
     }
 
     /**
@@ -33,6 +28,10 @@ public class RegistroAgua {
        DateTimeFormatter tf = DateTimeFormatter.ofPattern("hh:mm a");
        String horaActual = LocalTime.now().format(tf);
        this.ingestaDiaria.add(new IngestaAgua(horaActual, cantidadMl));
+    }
+    // OPCION PARA LA FECHA= LA QUE USA EL RELOJ NUEVO
+    public void registrarIngesta(float cantidadMl, String horaManual){
+        this.ingestaDiaria.add(new IngestaAgua(horaManual, cantidadMl));
     }
     //getters y setters
     public void establecerMeta(int nuevaMeta){
