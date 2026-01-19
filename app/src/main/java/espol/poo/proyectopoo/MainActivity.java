@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import espol.poo.proyectopoo.actividades.JuegoMemoriaInicioActivity;
 import espol.poo.proyectopoo.actividades.ListaActividades;
 import espol.poo.proyectopoo.modelo.Actividad;
+import espol.poo.proyectopoo.modelo.RegistroAgua;
 import espol.poo.proyectopoo.actividades.ActividadPrincipalHidratacion;
 import espol.poo.proyectopoo.actividades.ActividadSostenibilidad;
 
@@ -24,6 +25,9 @@ public class MainActivity extends AppCompatActivity {
 
         //Inicialización de datos
         Actividad.setData();
+        // La lista gigante se llene desde el archivo apenas abres la app
+        RegistroAgua modeloAgua = new RegistroAgua();
+        modeloAgua.cargarDesdeArchivo(this);
 
         // Enlace de los componentes visuales con las variables
         btnActividades = findViewById(R.id.btnActividades);

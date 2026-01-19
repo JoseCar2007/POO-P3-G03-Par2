@@ -8,11 +8,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import espol.poo.proyectopoo.modelo.IngestaAgua;
 import espol.poo.proyectopoo.R;
+import espol.poo.proyectopoo.modelo.RegistroAgua;
 public class IngestaAdapter extends RecyclerView.Adapter<IngestaAdapter.IngestaViewHolder> {
-    private ArrayList<IngestaAgua> listaIngestas;
-
-    public IngestaAdapter(ArrayList<IngestaAgua> listaIngestas) {
-        this.listaIngestas = listaIngestas;
+    private ArrayList<RegistroAgua.TomaAgua> listaTomas;
+    public IngestaAdapter(ArrayList<RegistroAgua.TomaAgua> listaTomas) {
+        this.listaTomas = listaTomas;
     }
     @NonNull
     @Override
@@ -24,16 +24,15 @@ public class IngestaAdapter extends RecyclerView.Adapter<IngestaAdapter.IngestaV
 
     @Override
     public void onBindViewHolder(@NonNull IngestaViewHolder holder, int position) {
-        IngestaAgua ingesta = listaIngestas.get(position);
+        RegistroAgua.TomaAgua toma = listaTomas.get(position);
 
-        // Formato: "250.0 ml - 10:30 AM"
-        String texto = ingesta.getCantidadMl() + " ml - " + ingesta.getHoraToma();
+        String texto = toma.cantidadMl + " ml - " + toma.hora;
         holder.tvDetalle.setText(texto);
     }
 
     @Override
     public int getItemCount() {
-        return listaIngestas.size();
+        return listaTomas.size();
     }
 
     public static class IngestaViewHolder extends RecyclerView.ViewHolder {
