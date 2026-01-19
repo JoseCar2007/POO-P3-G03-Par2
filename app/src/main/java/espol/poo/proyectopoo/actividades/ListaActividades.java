@@ -74,7 +74,7 @@ public class ListaActividades extends AppCompatActivity {
 
             }
         });
-        findViewById(R.id.btnRegresarMenu).setOnClickListener(v->finish());
+
 
     }
     /**
