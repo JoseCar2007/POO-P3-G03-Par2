@@ -8,9 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,10 +17,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import espol.poo.proyectopoo.R;
 import espol.poo.proyectopoo.modelo.Actividad;
 import espol.poo.proyectopoo.modelo.ActividadAcademica;
-import espol.poo.proyectopoo.modelo.ActividadPersonal;
-import espol.poo.proyectopoo.modelo.tipoActividad;
-import espol.poo.proyectopoo.modelo.TecnicasEnfoque;
-import java.util.ArrayList;
 import java.util.Collections;
 
 public class ListaActividades extends AppCompatActivity {

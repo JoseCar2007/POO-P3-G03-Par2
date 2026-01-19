@@ -1,7 +1,6 @@
 package espol.poo.proyectopoo.actividades;
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,8 +9,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import espol.poo.proyectopoo.modelo.RegistroSostenibilidad;
-import espol.poo.proyectopoo.modelo.AccionSostenible;
-import espol.poo.proyectopoo.actividades.SelectorAdapter;
 import espol.poo.proyectopoo.R;
 public class RegistrarSostenibilidadActivity extends AppCompatActivity {
     private RegistroSostenibilidad modelo;

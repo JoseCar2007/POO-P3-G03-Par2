@@ -3,7 +3,6 @@ package espol.poo.proyectopoo.actividades;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Debug;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,17 +10,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import espol.poo.proyectopoo.R;
 import espol.poo.proyectopoo.modelo.Actividad;
 import espol.poo.proyectopoo.modelo.ActividadAcademica;
-import espol.poo.proyectopoo.modelo.ActividadPersonal;
 
 import java.util.ArrayList;
 public class AdaptadorItemActividad extends RecyclerView.Adapter<AdaptadorItemActividad.ItemViewHolder>{
@@ -36,8 +31,9 @@ public class AdaptadorItemActividad extends RecyclerView.Adapter<AdaptadorItemAc
      */
     private final int TYPE_ACADEMICA = 2;
     private final int TYPE_PERSONAL = 1;
-    private ArrayList<Actividad> listaActividades;
+    private final ArrayList<Actividad> listaActividades;
     Context context;
+
     public AdaptadorItemActividad(Context context, ArrayList<Actividad> listaActividades){
         this.listaActividades = listaActividades;
         this.context = context;

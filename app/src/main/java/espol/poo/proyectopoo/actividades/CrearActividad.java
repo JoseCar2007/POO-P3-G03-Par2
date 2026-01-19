@@ -1,7 +1,6 @@
 package espol.poo.proyectopoo.actividades;
 
 import android.app.DatePickerDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,14 +10,10 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -81,7 +76,6 @@ public class CrearActividad extends AppCompatActivity {
         configurarDatePicker();
 
         LinearLayout layoutDinamico = (LinearLayout) findViewById(R.id.dynamicContainer);
-
 
         //Se configura el listener del spinner de categorias
         spinnerCategoria.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){

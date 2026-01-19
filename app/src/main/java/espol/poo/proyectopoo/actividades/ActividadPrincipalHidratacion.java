@@ -7,7 +7,6 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import android.app.DatePickerDialog;
-import android.widget.EditText;
 import java.util.Calendar;
 import androidx.recyclerview.widget.RecyclerView;
 import espol.poo.proyectopoo.R;

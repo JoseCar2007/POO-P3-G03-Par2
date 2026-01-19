@@ -6,7 +6,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
-import espol.poo.proyectopoo.modelo.IngestaAgua;
 import espol.poo.proyectopoo.R;
 import espol.poo.proyectopoo.modelo.RegistroAgua;
 public class IngestaAdapter extends RecyclerView.Adapter<IngestaAdapter.IngestaViewHolder> {
