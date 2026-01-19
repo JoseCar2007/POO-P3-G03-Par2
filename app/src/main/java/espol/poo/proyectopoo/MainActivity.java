@@ -32,9 +32,9 @@ public class MainActivity extends AppCompatActivity {
         btnJuegoMemoria = findViewById(R.id.btnJuegoMemoria);
         btnSalir = findViewById(R.id.btnSalir);
 
+        // Intent para iniciar las actividades que corresponden a los botones del menú principal.
         btnActividades.setOnClickListener(v -> {
 
-            // Intent para iniciar las actividades que corresponden a los botones del menú principal.
             Intent i = new Intent(this, ListaActividades.class);
             startActivity(i);
         });
@@ -48,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
              Intent i = new Intent(this, ActividadSostenibilidad.class);
             startActivity(i);
         });
-
 
         btnJuegoMemoria.setOnClickListener(v -> {
             Intent i = new Intent(this, JuegoMemoriaInicioActivity.class);
