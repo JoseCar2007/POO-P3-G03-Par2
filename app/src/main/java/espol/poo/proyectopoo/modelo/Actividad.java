@@ -77,7 +77,7 @@ public class Actividad implements Serializable, Comparable<Actividad> {
      * ya creada antes de iniciar la aplicacion
      */
     public static void setData(){
-        String[] lnombre = {"Actividad 1", "Actividad 2", "Actividad 3"};
+        String[] lnombre = {"Tarea de Hilos", "Tarea de Android", "Tarea de Lambda"};
 
         String[] lfecha = {"2026-01-01", "2026-01-02", "2026-01-03"};
         String[] lprioridad = {"Alta", "Media", "Baja"};
