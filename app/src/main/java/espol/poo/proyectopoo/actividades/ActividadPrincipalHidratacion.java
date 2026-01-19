@@ -6,6 +6,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import android.app.DatePickerDialog;
+import android.widget.EditText;
+import java.util.Calendar;
 import androidx.recyclerview.widget.RecyclerView;
 import espol.poo.proyectopoo.R;
 
@@ -23,7 +26,11 @@ public class ActividadPrincipalHidratacion extends AppCompatActivity {
         setContentView(R.layout.activity_principal_hidratacion);
 
         modeloAgua = new RegistroAgua();
-
+        TextView tvFecha = findViewById(R.id.txtFecha);
+        tvFecha.setText(modeloAgua.getFechaHoy());
+        tvFecha.setOnClickListener(v -> {
+            mostrarCalendario(tvFecha); //
+        });
         txtMeta = findViewById(R.id.txtMeta);
         txtTotal = findViewById(R.id.txtTotal);
         txtPorcentaje = findViewById(R.id.txtPorcentaje);
@@ -72,5 +79,25 @@ public class ActividadPrincipalHidratacion extends AppCompatActivity {
         // Actualizar la Lista (RecyclerView)
         adapter = new IngestaAdapter(modeloAgua.getHistorialTomas());
         recyclerView.setAdapter(adapter);
+    }
+    private void mostrarCalendario(TextView etFecha) {
+        // Obtener fecha actual para mostrarla seleccionada al abrir
+        final Calendar calendario = Calendar.getInstance();
+        int dia = calendario.get(Calendar.DAY_OF_MONTH);
+        int mes = calendario.get(Calendar.MONTH);
+        int anio = calendario.get(Calendar.YEAR);
+
+        // Crear el diálogo
+        DatePickerDialog datePicker = new DatePickerDialog(
+                this,
+                (view, year, month, dayOfMonth) -> {
+                    String fechaSeleccionada = dayOfMonth + "/" + (month + 1) + "/" + year;
+
+                    etFecha.setText(fechaSeleccionada);
+                },
+                anio, mes, dia
+        );
+
+        datePicker.show();
     }
 }

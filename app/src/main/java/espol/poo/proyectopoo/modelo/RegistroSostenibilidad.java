@@ -12,7 +12,7 @@ public class RegistroSostenibilidad {
      * @param textosAcciones: Textos de cada acción sostenible
      */
     private static ArrayList<AccionSostenible> accionesDiarias= new ArrayList<>();
-    private int[] contadoresSemana = {4, 3, 5, 2};
+    private static int[] contadoresSemana = {4, 3, 5, 2};
     public RegistroSostenibilidad() {
         // El constructor ya no reinicia la lista si ya existe
         if (accionesDiarias == null) {

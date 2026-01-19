@@ -41,6 +41,10 @@ public class RegistroAgua {
     public String getFecha() {
         return this.fecha;
     }
+    public String getFechaHoy() {
+        // Esto obtiene la fecha actual del sistema
+        return LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+    }
 
     public int getMetaDiaria() {
         return RegistroAgua.metaDiaria;
