@@ -5,12 +5,13 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
+
 
 import espol.poo.proyectopoo.MainActivity;
 import espol.poo.proyectopoo.R;
@@ -19,7 +20,8 @@ import espol.poo.proyectopoo.modelo.JuegoMemoria;
 public class JuegoMemoriaActivity extends AppCompatActivity {
 
     private JuegoMemoria juego;
-    private final Button[] botones = new Button[16];
+    /* Usamos ImageButton en lugar de Button para que el icono se vea sobre el fondo verde */
+    private final ImageButton[] botones = new ImageButton[16];
     private TextView tvInfo;
     private GridLayout gridRespuestas;
 
@@ -28,11 +30,11 @@ public class JuegoMemoriaActivity extends AppCompatActivity {
     private int intentos = 0;
     private int paresEncontrados = 0;
 
-    // CAMBIO: Array de IDs de tus Drawables (Imágenes reales)
-    // Asegúrate de haber creado estos iconos en res/drawable
+    /* CAMBIO: Array de IDs de tus Drawables (Imágenes reales)
+       Asegúrate de haber creado estos iconos en res/drawable con color BLANCO */
     private final int[] imagenes = {
             R.drawable.ic_sol,      R.drawable.ic_agua,
-            R.drawable.ic_aire,     R.drawable.ic_reciclaje, // O el nombre que les hayas puesto
+            R.drawable.ic_aire,     R.drawable.ic_reciclaje,
             R.drawable.ic_vidrio,   R.drawable.ic_metal,
             R.drawable.ic_plastico, R.drawable.ic_papel
     };
@@ -49,7 +51,7 @@ public class JuegoMemoriaActivity extends AppCompatActivity {
         Button btnTrampa = findViewById(R.id.btnTrampa);
         Button btnIrInicio = findViewById(R.id.btnIrInicio);
 
-        // Array de IDs para evitar el warning de getIdentifier
+        /* Array de IDs para evitar el warning de getIdentifier (Buena Práctica) */
         int[] idsBotones = {
                 R.id.b0, R.id.b1, R.id.b2, R.id.b3,
                 R.id.b4, R.id.b5, R.id.b6, R.id.b7,
@@ -58,6 +60,7 @@ public class JuegoMemoriaActivity extends AppCompatActivity {
         };
 
         for (int i = 0; i < idsBotones.length; i++) {
+            // Casteamos a ImageButton
             botones[i] = findViewById(idsBotones[i]);
             final int index = i + 1;
             botones[i].setOnClickListener(v -> manejarClick(index));
@@ -68,7 +71,8 @@ public class JuegoMemoriaActivity extends AppCompatActivity {
         // Listener del botón trampa
         btnTrampa.setOnClickListener(v -> mostrarRespuestas());
 
-        // Botón volver al Inicio del juego
+        /* CORRECCIÓN RÚBRICA (2 PUNTOS):
+           Se debe proveer un medio para volver a la pantalla principal de INICIO DEL JUEGO */
         btnIrInicio.setOnClickListener(v -> {
             Intent i = new Intent(this, JuegoMemoriaInicioActivity.class);
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
@@ -76,10 +80,9 @@ public class JuegoMemoriaActivity extends AppCompatActivity {
             finish();
         });
 
-        // Botón volver a la pantalla del menú principal
-        // Botón volver a la pantalla del menú principal (MainActivity)
+        /* Botón para volver al MENÚ PRINCIPAL de la App (Navegación General) */
         btnVolver.setOnClickListener(v -> {
-            Intent i = new Intent(this, MainActivity.class); // <--- CAMBIAR A MainActivity
+            Intent i = new Intent(this, MainActivity.class); // <--- Va al MainActivity
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(i);
             finish();
@@ -104,10 +107,10 @@ public class JuegoMemoriaActivity extends AppCompatActivity {
         }
 
         // Resetear botones
-        for (Button btn : botones) {
-            btn.setText(""); // Sin texto porque ahora usaremos imágenes
-            // Ponemos el fondo verde (carta tapada)
-            btn.setBackgroundResource(R.drawable.fondo_carta);
+        for (ImageButton btn : botones) {
+            /* IMPORTANTE: */
+            btn.setImageResource(0); // 1. Quitamos el icono (Sol/Agua)
+            btn.setBackgroundResource(R.drawable.fondo_carta); // 2. Ponemos el fondo verde
             btn.setEnabled(true);
         }
     }
@@ -119,9 +122,10 @@ public class JuegoMemoriaActivity extends AppCompatActivity {
 
         int indexArray = numeroCarta - 1;
 
-        // --- CORRECCIÓN RÚBRICA (8 PUNTOS) ---
-        // Mostrar la IMAGEN (Drawable) en lugar de texto
-        botones[indexArray].setBackgroundResource(juego.verImagen(numeroCarta));
+        /*
+           Visualiza tablero con imágenes escondidas y destapadas.
+           Usamos setImageResource para poner el icono encima del fondo verde. */
+        botones[indexArray].setImageResource(juego.verImagen(numeroCarta));
 
         if (primeraSeleccion == -1) {
             primeraSeleccion = numeroCarta;
@@ -147,44 +151,45 @@ public class JuegoMemoriaActivity extends AppCompatActivity {
 
             } else {
                 new Handler().postDelayed(() -> {
-                    // Ocultar volviendo a poner el fondo verde
-                    botones[primeraSeleccion - 1].setBackgroundResource(R.drawable.fondo_carta);
-                    botones[numeroCarta - 1].setBackgroundResource(R.drawable.fondo_carta);
+                    /* Ocultar volviendo a poner la imagen en 0 (null)
+                       El fondo verde se mantiene solo */
+                    botones[primeraSeleccion - 1].setImageResource(0);
+                    botones[numeroCarta - 1].setImageResource(0);
 
                     primeraSeleccion = -1;
                     bloqueo = false;
-                }, 1000);
+                }, 500);
             }
         }
     }
 
-    // --- TRAMPA ACTUALIZADA PARA IMÁGENES ---
+    /* Muestra las imágenes de las cartas seleccionadas con el botón Ver Respuestas */
     private void mostrarRespuestas() {
         if (gridRespuestas.getVisibility() == View.VISIBLE) return;
         gridRespuestas.removeAllViews();
 
         for (int i = 1; i <= 16; i++) {
-            // Ahora creamos ImageView en lugar de TextView
             ImageView imgMini = new ImageView(this);
-
             int idImagen = juego.verImagen(i);
             imgMini.setImageResource(idImagen);
 
-            // Ajuste de tamaño
             GridLayout.LayoutParams params = new GridLayout.LayoutParams();
             params.width = 100;
             params.height = 100;
             params.setMargins(8, 8, 8, 8);
             imgMini.setLayoutParams(params);
 
-            // Fondo verde o transparente para que se vea bien el icono
-            imgMini.setBackgroundColor(ContextCompat.getColor(this, R.color.verde_oscuro));
+            /* Usamos el mismo drawable que las cartas para que tenga bordes redondeados */
+            imgMini.setBackgroundResource(R.drawable.fondo_carta);
+            imgMini.setPadding(10, 10, 10, 10); // Padding para que el icono no toque el borde
+
             gridRespuestas.addView(imgMini);
         }
         gridRespuestas.setVisibility(View.VISIBLE);
     }
 
     private void actualizarTextoInfo() {
+        /* Usamos placeholders %d para evitar warnings de concatenación */
         String mensaje = getString(R.string.texto_stats, intentos, paresEncontrados);
         tvInfo.setText(mensaje);
     }

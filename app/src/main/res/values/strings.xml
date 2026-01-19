@@ -12,5 +12,5 @@
     <string name="btn_volver_menu">Volver al Menú</string>
     <string name="btn_ver_respuestas">👁️ Ver Respuestas (Solo Ing. Gladys)</string>
     <string name="btn_ir_inicio">Inicio del Juego</string>
-
+    <string name="desc_carta">Carta oculta del juego de memoria</string>
 </resources>

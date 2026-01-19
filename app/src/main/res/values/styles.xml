@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="EstiloCarta">
+    <style name="EstiloCarta" parent="Widget.MaterialComponents.Button">
         <item name="android:layout_width">70dp</item>
         <item name="android:layout_height">70dp</item>
         <item name="android:layout_margin">4dp</item>
+
+        <item name="backgroundTint">@null</item>
+
+
 
         <item name="android:background">@drawable/fondo_carta</item>
         <item name="android:textColor">@color/texto_blanco</item>
