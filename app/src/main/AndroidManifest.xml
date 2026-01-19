@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProyectoPoo" >
         <activity
-            android:name=".actividades.JuegoMemoriaInicio"
+            android:name=".actividades.JuegoMemoriaInicioActivity"
             android:exported="false" />
         <activity
             android:name=".actividades.JuegoMemoriaActivity"

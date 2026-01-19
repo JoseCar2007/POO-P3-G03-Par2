@@ -4,47 +4,66 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:padding="24dp">
+    android:padding="30dp"
+    android:background="@color/white">
 
     <TextView
-        android:text="MENÚ PRINCIPAL"
-        android:textSize="24sp"
+        android:text="@string/menu_titulo"
+        android:textSize="26sp"
         android:textStyle="bold"
-        android:layout_marginBottom="24dp"
+        android:textColor="#333333"
+        android:layout_marginBottom="40dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
     <Button
         android:id="@+id/btnActividades"
-        android:text="Gestión de Actividades"
+        android:text="@string/btn_actividades"
+        android:backgroundTint="@color/boton_menu_morado"
+        android:textColor="@color/white"
+        android:layout_marginBottom="12dp"
+        android:paddingVertical="12dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
     <Button
         android:id="@+id/btnHidratacion"
-        android:text="Control de Hidratación"
+        android:text="@string/btn_hidratacion"
+        android:backgroundTint="@color/boton_menu_morado"
+        android:textColor="@color/white"
+        android:layout_marginBottom="12dp"
+        android:paddingVertical="12dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
     <Button
         android:id="@+id/btnSostenibilidad"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Registro diario de Sostenibilidad" />
-
-    <Button
-        android:id="@+id/btnJuegoMemoria"
-        android:text="Juego de Memoria"
+        android:text="@string/btn_sostenibilidad"
+        android:backgroundTint="@color/boton_menu_morado"
+        android:textColor="@color/white"
+        android:layout_marginBottom="12dp"
+        android:paddingVertical="12dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <!-- BOTÓN SALIR -->
+    <Button
+        android:id="@+id/btnJuegoMemoria"
+        android:text="@string/btn_juego"
+        android:backgroundTint="@color/boton_menu_morado"
+        android:textColor="@color/white"
+        android:layout_marginBottom="12dp"
+        android:paddingVertical="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
     <Button
         android:id="@+id/btnSalir"
+        android:text="@string/btn_salir"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="@color/boton_salir_rojo"
+        android:textColor="@color/white"
+        android:paddingVertical="12dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Salir"
-        android:backgroundTint="#D32F2F"
-        android:textColor="#FFFFFF" />
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

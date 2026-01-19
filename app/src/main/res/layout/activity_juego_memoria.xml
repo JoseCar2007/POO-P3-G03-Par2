@@ -1,33 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/gridMemoria"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:columnCount="4"
-    android:rowCount="4"
-    android:padding="16dp">
+    android:background="@color/verde_fondo"
+    android:padding="16dp"
+    android:gravity="center"
+    android:orientation="vertical">
 
-    <!-- 16 BOTONES -->
-    <!-- todos iguales, solo cambia el id -->
+    <TextView
+        android:text="@string/titulo_juego"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="@color/verde_oscuro"
+        android:layout_marginBottom="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
-    <Button android:id="@+id/b0" style="@style/Carta"/>
-    <Button android:id="@+id/b1" style="@style/Carta"/>
-    <Button android:id="@+id/b2" style="@style/Carta"/>
-    <Button android:id="@+id/b3" style="@style/Carta"/>
+    <TextView
+        android:id="@+id/tvInfo"
+        android:text="@string/texto_stats"
+        android:textSize="18sp"
+        android:textColor="@color/verde_oscuro"
+        android:layout_marginBottom="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
-    <Button android:id="@+id/b4" style="@style/Carta"/>
-    <Button android:id="@+id/b5" style="@style/Carta"/>
-    <Button android:id="@+id/b6" style="@style/Carta"/>
-    <Button android:id="@+id/b7" style="@style/Carta"/>
+    <GridLayout
+        android:id="@+id/gridMemoria"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:columnCount="4"
+        android:rowCount="4"
+        android:alignmentMode="alignMargins">
 
-    <Button android:id="@+id/b8" style="@style/Carta"/>
-    <Button android:id="@+id/b9" style="@style/Carta"/>
-    <Button android:id="@+id/b10" style="@style/Carta"/>
-    <Button android:id="@+id/b11" style="@style/Carta"/>
+        <Button android:id="@+id/b0" style="@style/EstiloCarta"/>
+        <Button android:id="@+id/b1" style="@style/EstiloCarta"/>
+        <Button android:id="@+id/b2" style="@style/EstiloCarta"/>
+        <Button android:id="@+id/b3" style="@style/EstiloCarta"/>
 
-    <Button android:id="@+id/b12" style="@style/Carta"/>
-    <Button android:id="@+id/b13" style="@style/Carta"/>
-    <Button android:id="@+id/b14" style="@style/Carta"/>
-    <Button android:id="@+id/b15" style="@style/Carta"/>
+        <Button android:id="@+id/b4" style="@style/EstiloCarta"/>
+        <Button android:id="@+id/b5" style="@style/EstiloCarta"/>
+        <Button android:id="@+id/b6" style="@style/EstiloCarta"/>
+        <Button android:id="@+id/b7" style="@style/EstiloCarta"/>
 
-</GridLayout>
+        <Button android:id="@+id/b8" style="@style/EstiloCarta"/>
+        <Button android:id="@+id/b9" style="@style/EstiloCarta"/>
+        <Button android:id="@+id/b10" style="@style/EstiloCarta"/>
+        <Button android:id="@+id/b11" style="@style/EstiloCarta"/>
+
+        <Button android:id="@+id/b12" style="@style/EstiloCarta"/>
+        <Button android:id="@+id/b13" style="@style/EstiloCarta"/>
+        <Button android:id="@+id/b14" style="@style/EstiloCarta"/>
+        <Button android:id="@+id/b15" style="@style/EstiloCarta"/>
+
+    </GridLayout>
+
+    <Button
+        android:id="@+id/btnTrampa"
+        android:text="@string/btn_ver_respuestas"
+        android:backgroundTint="#FF9800"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        android:layout_marginTop="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <GridLayout
+        android:id="@+id/gridRespuestas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:columnCount="4"
+        android:rowCount="4"
+        android:visibility="gone"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp">
+    </GridLayout>
+
+    <LinearLayout
+        style="?android:attr/buttonBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnReiniciar"
+            style="?android:attr/buttonBarButtonStyle"
+            android:text="@string/boton_reiniciar"
+            android:backgroundTint="@color/verde_claro"
+            android:textColor="@color/white"
+            android:layout_marginEnd="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/btnVolver"
+            style="?android:attr/buttonBarButtonStyle"
+            android:text="@string/btn_volver_menu"
+            android:backgroundTint="@color/boton_salir_rojo"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+</LinearLayout>
