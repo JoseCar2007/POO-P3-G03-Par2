@@ -12,6 +12,9 @@ public class RegistroSostenibilidad {
      * @param textosAcciones: Textos de cada acción sostenible
      */
     private static ArrayList<AccionSostenible> accionesDiarias= new ArrayList<>();
+    private static String fechaUltimoRegistro = "";
+    // Esto recuerda true/false para las 4 acciones DE HOY
+    private static boolean[] accionesHoy = {false, false, false, false};
     private static int[] contadoresSemana = {4, 3, 5, 2};
     public RegistroSostenibilidad() {
         // El constructor ya no reinicia la lista si ya existe
@@ -34,18 +37,63 @@ public class RegistroSostenibilidad {
      */
     public void registrarAcciones(int[] indicesSeleccionados){
         String fechaHoy = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-        accionesDiarias.clear();
+        // Si es un día nuevo, reiniciamos la memoria de hoy
+        if (!fechaHoy.equals(fechaUltimoRegistro)) {
+            fechaUltimoRegistro = fechaHoy;
+            accionesHoy = new boolean[]{false, false, false, false}; // Todo a false
+            accionesDiarias.clear();
+        }
+        //Convertimos la selección actual a un array de booleanos temporal
+        boolean[] nuevaSeleccion = {false, false, false, false};
+        accionesDiarias.clear(); // Limpiamos para volver a llenar con lo actual
+
         for (int i : indicesSeleccionados) {
             if (i >= 0 && i < 4) {
-                String indecin = textosAcciones[i];
-                AccionSostenible nuevaAccion = new AccionSostenible(fechaHoy, indecin);
-                accionesDiarias.add(nuevaAccion);
+                nuevaSeleccion[i] = true;
+                // Agregamos a la lista visual para que getPuntosHoy() funcione
+                accionesDiarias.add(new AccionSostenible(fechaHoy, textosAcciones[i]));
+            }
+        }
+
+        for (int i = 0; i < 4; i++) {
+            // CASO A: Antes NO estaba marcado, y AHORA SÍ -> Sumamos (+1)
+            if (!accionesHoy[i] && nuevaSeleccion[i]) {
                 if (contadoresSemana[i] < 7) {
                     contadoresSemana[i]++;
                 }
             }
-    } 
-    } 
+            // CASO B: Antes SÍ estaba marcado, y AHORA NO (lo desmarcó) -> Restamos (-1)
+            else if (accionesHoy[i] && !nuevaSeleccion[i]) {
+                if (contadoresSemana[i] > 0) {
+                    contadoresSemana[i]--;
+                }
+            }
+            // CASO C: Si estaba marcado y sigue marcado -> No hacemos nada (+0)
+        }
+
+        // Actualizamos la memoria de hoy
+        accionesHoy = nuevaSeleccion;
+    }
+    /**
+     * NUEVO MÉTODO Sirve para que cuando se abra la pantalla, los cuadritos aparezcan
+     * ya marcados si ya se guardo ese dia.
+     */
+    public ArrayList<Integer> getIndicesYaMarcadosHoy() {
+        String fechaHoy = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        ArrayList<Integer> indices = new ArrayList<>();
+
+        // Si cambió el día, no devolvemos nada (todo desmarcado)
+        if (!fechaHoy.equals(fechaUltimoRegistro)) {
+            return indices;
+        }
+
+        for (int i = 0; i < accionesHoy.length; i++) {
+            if (accionesHoy[i]) {
+                indices.add(i);
+            }
+        }
+        return indices;
+    }
     public int getPuntosHoy() {
         return accionesDiarias.size(); 
     }
@@ -134,5 +182,8 @@ public class RegistroSostenibilidad {
     //Para el Adapter, si se agrega otra actividad ya se veria en este
     public int getCantidadAcciones() {
         return textosAcciones.length;
+    }
+    public String[] getTodasLasAcciones() {
+        return textosAcciones;
     }
 }

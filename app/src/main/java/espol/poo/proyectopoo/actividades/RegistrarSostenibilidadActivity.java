@@ -15,7 +15,7 @@ import espol.poo.proyectopoo.actividades.SelectorAdapter;
 import espol.poo.proyectopoo.R;
 public class RegistrarSostenibilidadActivity extends AppCompatActivity {
     private RegistroSostenibilidad modelo;
-    private SelectorAdapter adapter; // <--- Variable nueva
+    private SelectorAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,33 +31,25 @@ public class RegistrarSostenibilidadActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.recyclerSeleccion);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        // 2. Crear Adaptador con la lista COMPLETA de acciones (dinámico)
-        // Necesitamos un getter en el modelo para obtener el String[] completo,
-        // OJO: Si no lo tienes, puedes crearlo temporalmente así:
-        String[] acciones = {
-                modelo.getNombreAccionFija(0),
-                modelo.getNombreAccionFija(1),
-                modelo.getNombreAccionFija(2),
-                modelo.getNombreAccionFija(3)
-        };
+
+        String[] acciones = modelo.getTodasLasAcciones();
 
         adapter = new SelectorAdapter(acciones);
-        recyclerView.setAdapter(adapter);
+
 
         tvFecha.setText("(" + modelo.getFecha() + ")");
+        // Preguntamos al modelo qué casillas ya tienen visto hoy
+        ArrayList<Integer> marcadosHoy = modelo.getIndicesYaMarcadosHoy();
 
-        // 3. Guardar
+        // Se las pasamos al adaptador para que las pinte de azul
+        adapter.setEstadosIniciales(marcadosHoy);
+        recyclerView.setAdapter(adapter);
+        // Guardar
         btnGuardar.setOnClickListener(v -> {
-            // ¡MAGIA! El adaptador nos da la lista lista de índices
             int[] seleccionados = adapter.obtenerIndicesSeleccionados();
-
-            if (seleccionados.length == 0) {
-                Toast.makeText(this, "Selecciona al menos una acción", Toast.LENGTH_SHORT).show();
-            } else {
-                modelo.registrarAcciones(seleccionados);
-                Toast.makeText(this, modelo.getMensajeDiario(), Toast.LENGTH_LONG).show();
-                finish();
-            }
+            modelo.registrarAcciones(seleccionados);
+            Toast.makeText(this, modelo.getMensajeDiario(), Toast.LENGTH_LONG).show();
+            finish();
         });
 
         btnCancelar.setOnClickListener(v -> finish());
