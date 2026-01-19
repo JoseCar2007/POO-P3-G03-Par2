@@ -9,23 +9,23 @@ public class JuegoMemoria {
      * @param baraja: ArrayList con las cartas de la baraja
      *
      */
-
     private Carta[][] tablero = new Carta[4][4];
     private ArrayList<Carta> baraja = new ArrayList<>();
 
-    public JuegoMemoria(String[] palabras){
-        generarBaraja(palabras);
+    // CAMBIO: Recibimos int[] (IDs de recursos) en lugar de String[]
+    public JuegoMemoria(int[] imagenes){
+        generarBaraja(imagenes);
         mezclarYUbicar();
     }
 
     /**
      * Metodo para generar la baraja de cartas
-     * @param palabras: Lista de palabras para generar las cartas
+     * @param imagenes: Lista de IDs de imágenes para generar las cartas
      */
-    private void generarBaraja(String[] palabras){
-        for(String p : palabras){
-            baraja.add(new Carta(p));
-            baraja.add(new Carta(p));
+    private void generarBaraja(int[] imagenes){
+        for(int img : imagenes){
+            baraja.add(new Carta(img));
+            baraja.add(new Carta(img));
         }
     }
 
@@ -51,8 +51,9 @@ public class JuegoMemoria {
         return tablero[fila][col];
     }
 
-    public String verValor(int numero){
-        return getCarta(numero).getValor();
+    // CAMBIO: Devolvemos int (ID imagen) en vez de String
+    public int verImagen(int numero){
+        return getCarta(numero).getIdImagen();
     }
 
     public boolean estaEmparejada(int numero){
@@ -66,17 +67,18 @@ public class JuegoMemoria {
 
     /**
      * Metodo para que se muestren las cartas que ya han sido emparejadas
-     * @return tablero con las cartas que han sido emparejadas
+     * NOTA: Adaptado para devolver IDs de imágenes. 0 significa oculto/signo de interrogación.
+     * @return tablero con los IDs de las cartas emparejadas
      */
-    public String[][] getTableroVisible(){
-        String[][] visible = new String[4][4];
+    public int[][] getTableroVisible(){
+        int[][] visible = new int[4][4];
 
         for(int i=0;i<4;i++){
             for(int j=0;j<4;j++){
                 if(tablero[i][j].estaEmparejada()){
-                    visible[i][j] = tablero[i][j].getValor();
+                    visible[i][j] = tablero[i][j].getIdImagen();
                 } else {
-                    visible[i][j] = "?";
+                    visible[i][j] = 0; // 0 representa que no se muestra nada o un placeholder
                 }
             }
         }
@@ -84,29 +86,31 @@ public class JuegoMemoria {
     }
 
     /**
-     * Metodo para generar las pistas de la ubicacion de las palabras
+     * ESTE MÉTHOD QUEDÓ OBSOLETO DEBIDO AL CAMBIO EN EL MODELO PORQUE PASAMOS DE STRINGS A IMÁGENES PARA LAS CARTAS
+     * Metodo para generar las pistas de la ubicacion de las imágenes
      * para facilitar revisión :)
-     * @param palabras: Se obtienen las palabras que han sido colocadas para
-     *                encontrar sus pares
-     * @return pares: Se devuelve la lista de pares encontrados
+     * @param imagenes: Se obtienen los IDs de imágenes colocados
+     * @return pares: Se devuelve la lista de pares encontrados (Nombre/ID y coordenadas)
      */
-    public String[][] generarPistas(String[] palabras){
+    public String[][] generarPistas(int[] imagenes){
         String[][] pares = new String[8][5];
         int k = 0;
 
-        for(String p : palabras){
+        for(int img : imagenes){
             int f1=-1, c1=-1, f2=-1, c2=-1;
 
             for(int i=0;i<4;i++){
                 for(int j=0;j<4;j++){
-                    if(tablero[i][j].getValor().equals(p)){
+                    // Comparamos por ID de imagen (int)
+                    if(tablero[i][j].getIdImagen() == img){
                         if(f1 == -1){ f1=i; c1=j; }
                         else       { f2=i; c2=j; }
                     }
                 }
             }
 
-            pares[k][0] = p;
+            // Guardamos el ID como String solo para el reporte de pistas
+            pares[k][0] = String.valueOf(img);
             pares[k][1] = String.valueOf(f1);
             pares[k][2] = String.valueOf(c1);
             pares[k][3] = String.valueOf(f2);
@@ -117,4 +121,3 @@ public class JuegoMemoria {
         return pares;
     }
 }
-

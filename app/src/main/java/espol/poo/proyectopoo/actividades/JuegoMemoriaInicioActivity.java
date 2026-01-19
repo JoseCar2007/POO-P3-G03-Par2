@@ -15,6 +15,7 @@ public class JuegoMemoriaInicioActivity extends AppCompatActivity {
         super.onCreate(b);
         setContentView(R.layout.activity_juego_memoria_inicio);
 
+        // Botón para iniciar el juego
         findViewById(R.id.btnIniciarJuego).setOnClickListener(v -> startActivity(new Intent(this, JuegoMemoriaActivity.class)));
     }
 }
