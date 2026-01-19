@@ -60,11 +60,18 @@ public class RegistrarActivityTomaAgua extends AppCompatActivity {
                 if (cantidadStr.isEmpty() || horaStr.isEmpty()) {
                     Toast.makeText(RegistrarActivityTomaAgua.this, "Completa todos los datos", Toast.LENGTH_SHORT).show();
                 } else {
-                    // Guardar en el modelo compartido
+                    //Convertir cantidad a numero
                     float cantidad = Float.parseFloat(cantidadStr);
-                    modelo.registrarIngesta(cantidad, horaStr);
+                    // Intentamos recuperar la fecha que nos enviaron
+                    String fechaRecibida = getIntent().getStringExtra("FECHA_PARA_GUARDAR");
 
-                    // Volver a la pantalla principal
+                    // (Seguridad) Si por alguna razón llegó vacía, usamos la de hoy como plan B
+                    if (fechaRecibida == null) {
+                        fechaRecibida = modelo.getFechaHoy();
+                    }
+                    // 2. Guardamos usando ESA fecha recibida.
+                    modelo.registrarIngesta(fechaRecibida, cantidad, RegistrarActivityTomaAgua.this);
+
                     finish();
                 }
             }

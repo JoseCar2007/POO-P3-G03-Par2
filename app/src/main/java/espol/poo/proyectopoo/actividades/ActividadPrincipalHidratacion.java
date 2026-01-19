@@ -19,6 +19,7 @@ public class ActividadPrincipalHidratacion extends AppCompatActivity {
     private RecyclerView recyclerView;
     private IngestaAdapter adapter;
     private RegistroAgua modeloAgua;
+    private TextView tvFecha;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +27,8 @@ public class ActividadPrincipalHidratacion extends AppCompatActivity {
         setContentView(R.layout.activity_principal_hidratacion);
 
         modeloAgua = new RegistroAgua();
-        TextView tvFecha = findViewById(R.id.txtFecha);
+        modeloAgua.cargarDesdeArchivo(this);
+        tvFecha = findViewById(R.id.txtFecha);
         tvFecha.setText(modeloAgua.getFechaHoy());
         tvFecha.setOnClickListener(v -> {
             mostrarCalendario(tvFecha); //
@@ -53,6 +55,7 @@ public class ActividadPrincipalHidratacion extends AppCompatActivity {
         // Botón "Registrar" -> Abre RegistrarActivityTomaAgua
         btnRegistrar.setOnClickListener(v -> {
             Intent intent = new Intent(ActividadPrincipalHidratacion.this, RegistrarActivityTomaAgua.class);
+            intent.putExtra("FECHA_PARA_GUARDAR", tvFecha.getText().toString());
             startActivity(intent);
         });
 
@@ -67,17 +70,21 @@ public class ActividadPrincipalHidratacion extends AppCompatActivity {
 
     // Método para refrescar textos, barra y lista
     private void actualizarPantalla() {
+        String fechaSeleccionada = tvFecha.getText().toString();
         // Actualizar Textos
+        // El modelo necesita saber qué día filtrar
+        float total = modeloAgua.getIngestaAcumulada(fechaSeleccionada);
+        int porcentaje = modeloAgua.getPorcentajeProgreso(fechaSeleccionada);
         txtMeta.setText(modeloAgua.getMetaDiaria() + " ml");
-        txtTotal.setText(modeloAgua.getIngestaAcumulada() + " ml");
-        txtPorcentaje.setText(modeloAgua.getPorcentajeProgreso() + "%");
+        txtTotal.setText(total + " ml");
+        txtPorcentaje.setText(porcentaje + "%");
 
         // Actualizar la Ruedita
         progressBarCircular.setMax(modeloAgua.getMetaDiaria());
-        progressBarCircular.setProgress((int) modeloAgua.getIngestaAcumulada());
+        progressBarCircular.setProgress((int) modeloAgua.getIngestaAcumulada(tvFecha.getText().toString()));
 
         // Actualizar la Lista (RecyclerView)
-        adapter = new IngestaAdapter(modeloAgua.getHistorialTomas());
+        adapter = new IngestaAdapter(modeloAgua.getHistorialTomas(fechaSeleccionada));
         recyclerView.setAdapter(adapter);
     }
     private void mostrarCalendario(TextView etFecha) {
@@ -91,9 +98,11 @@ public class ActividadPrincipalHidratacion extends AppCompatActivity {
         DatePickerDialog datePicker = new DatePickerDialog(
                 this,
                 (view, year, month, dayOfMonth) -> {
-                    String fechaSeleccionada = dayOfMonth + "/" + (month + 1) + "/" + year;
-
+                    // Formato debe ser idéntico al de getFechaHoy: dd/MM/yyyy
+                    String fechaSeleccionada = String.format("%02d/%02d/%d", dayOfMonth, (month + 1), year);
                     etFecha.setText(fechaSeleccionada);
+                    // 7. IMPORTANTE: ACTUALIZAR LA PANTALLA AL CAMBIAR LA FECHA
+                    actualizarPantalla(); // <--- CAMBIO: Para ver los datos de ese día
                 },
                 anio, mes, dia
         );
