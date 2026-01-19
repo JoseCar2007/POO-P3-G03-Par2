@@ -9,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import espol.poo.proyectopoo.actividades.JuegoMemoriaInicioActivity;
 import espol.poo.proyectopoo.actividades.ListaActividades;
 import espol.poo.proyectopoo.modelo.Actividad;
+import espol.poo.proyectopoo.actividades.ActividadPrincipalHidratacion;
+import espol.poo.proyectopoo.actividades.ActividadSostenibilidad;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,15 +39,14 @@ public class MainActivity extends AppCompatActivity {
         });
 
         btnHidratacion.setOnClickListener(v -> {
-            // TODO - Descomentar cuando esté lista HidratacionActivity
-            // Intent i = new Intent(this, HidratacionActivity.class);
-            // startActivity(i);
+            Intent i = new Intent(this, ActividadPrincipalHidratacion.class);
+            startActivity(i);
         });
 
         btnSostenibilidad.setOnClickListener(v -> {
             // TODO - Descomentar cuando esté lista SostenibilidadActivity
-            // Intent i = new Intent(this, SostenibilidadActivity.class);
-            // startActivity(i);
+             Intent i = new Intent(this, ActividadSostenibilidad.class);
+            startActivity(i);
         });
 
 
