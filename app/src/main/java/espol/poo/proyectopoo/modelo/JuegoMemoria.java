@@ -7,10 +7,9 @@ public class JuegoMemoria {
     /**
      * @param tablero: tablero del juego, 4 filas y 4 columnas de cartas
      * @param baraja: ArrayList con las cartas de la baraja
-     *
      */
-    private Carta[][] tablero = new Carta[4][4];
-    private ArrayList<Carta> baraja = new ArrayList<>();
+    private final Carta[][] tablero = new Carta[4][4];
+    private final ArrayList<Carta> baraja = new ArrayList<>();
 
     // CAMBIO: Recibimos int[] (IDs de recursos) en lugar de String[]
     public JuegoMemoria(int[] imagenes){
@@ -66,6 +65,7 @@ public class JuegoMemoria {
     }
 
     /**
+     * * ESTE MÉTHOD QUEDÓ OBSOLETO DEBIDO AL CAMBIO EN EL MODELO PORQUE PASAMOS DE STRINGS A IMÁGENES PARA LAS CARTAS
      * Metodo para que se muestren las cartas que ya han sido emparejadas
      * NOTA: Adaptado para devolver IDs de imágenes. 0 significa oculto/signo de interrogación.
      * @return tablero con los IDs de las cartas emparejadas
