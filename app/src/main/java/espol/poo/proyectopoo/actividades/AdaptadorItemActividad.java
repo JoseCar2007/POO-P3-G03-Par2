@@ -1,5 +1,6 @@
 package espol.poo.proyectopoo.actividades;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Debug;
@@ -123,8 +124,25 @@ public class AdaptadorItemActividad extends RecyclerView.Adapter<AdaptadorItemAc
         holder.btnEliminar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Actividad.removerActividad(ac);
-                notifyItemRemoved(position);
+                Dialog d = new Dialog(context);
+                d.setContentView(R.layout.advertencia_avance);
+                d.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                d.setCancelable(false);
+                d.findViewById(R.id.btnSi).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Actividad.removerActividad(ac);
+                        notifyItemRemoved(position);
+                        d.dismiss();
+                    }
+                });
+                d.findViewById(R.id.btnNo).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        d.dismiss();
+                    }
+                });
+                d.show();
             }
         });
         //Si se tiene un Holder de Actividad academica se colocarán los
