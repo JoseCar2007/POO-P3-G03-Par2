@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
         btnActividades.setOnClickListener(v -> {
 
+            // Intent para iniciar las actividades que corresponden a los botones del menú principal.
             Intent i = new Intent(this, ListaActividades.class);
             startActivity(i);
         });
@@ -44,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
         btnSostenibilidad.setOnClickListener(v -> {
-            // TODO - Descomentar cuando esté lista SostenibilidadActivity
              Intent i = new Intent(this, ActividadSostenibilidad.class);
             startActivity(i);
         });

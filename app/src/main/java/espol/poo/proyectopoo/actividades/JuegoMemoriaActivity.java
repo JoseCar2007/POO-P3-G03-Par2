@@ -15,6 +15,7 @@ import espol.poo.proyectopoo.MainActivity;
 import espol.poo.proyectopoo.R;
 import espol.poo.proyectopoo.modelo.JuegoMemoria;
 
+// Esta actividad se inicia después de clickar el botón "Iniciar Juego" en la pantalla del layout de JuegoMemoriaInicioActivity.xml
 public class JuegoMemoriaActivity extends AppCompatActivity {
 
     private JuegoMemoria juego;
@@ -39,6 +40,7 @@ public class JuegoMemoriaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_juego_memoria);
 
+        // Obtener referencias a los elementos del XML
         tvInfo = findViewById(R.id.tvInfo);
         Button btnReiniciar = findViewById(R.id.btnReiniciar);
         Button btnVolver = findViewById(R.id.btnVolver);
@@ -55,7 +57,6 @@ public class JuegoMemoriaActivity extends AppCompatActivity {
                 R.id.b12, R.id.b13, R.id.b14, R.id.b15
         };
 
-        // 2. Ciclo optimizado
         for (int i = 0; i < idsBotones.length; i++) {
             // Asignamos el botón usando el ID del array
             botones[i] = findViewById(idsBotones[i]);
@@ -143,7 +144,7 @@ public class JuegoMemoriaActivity extends AppCompatActivity {
 
             } else {
                 // --- FALLO ---
-                // Esperamos 1 segundo (1000ms) y luego las ocultamos
+                // Esperamos medio segundo (500ms) y luego las ocultamos
                 new Handler().postDelayed(() -> {
                     // Ocultar texto visualmente
                     botones[primeraSeleccion - 1].setText("?");
