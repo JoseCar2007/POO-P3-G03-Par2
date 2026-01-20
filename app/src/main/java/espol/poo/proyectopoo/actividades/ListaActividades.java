@@ -17,8 +17,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import espol.poo.proyectopoo.R;
 import espol.poo.proyectopoo.modelo.Actividad;
 import espol.poo.proyectopoo.modelo.ActividadAcademica;
+
+import java.io.IOException;
 import java.util.Collections;
 
+import java.io.ObjectOutputStream;
+import java.io.FileOutputStream;
 public class ListaActividades extends AppCompatActivity {
 
     AdaptadorItemActividad adaptador;
@@ -83,4 +87,17 @@ public class ListaActividades extends AppCompatActivity {
         adaptador.notifyDataSetChanged();
     }
 
+    @Override
+    public void onStop(){
+        super.onStop();
+        try(FileOutputStream fos = openFileOutput("actividades.ser", Context.MODE_PRIVATE);
+            ObjectOutputStream os = new ObjectOutputStream(fos)){
+            os.writeObject(Actividad.getActividades());
+        }catch(IOException e){
+            Log.e("DEBUG", "Error al guardar las actividades", e);
+        }catch(Exception e){
+            Log.e("DEBUG", "Error al guardar las actividades", e);
+        }
+
+    }
 }

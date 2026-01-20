@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //Inicialización de datos
-        Actividad.setData();
+        Actividad.cargarDatos(this);
         // La lista gigante se llene desde el archivo apenas abres la app
         RegistroAgua modeloAgua = new RegistroAgua();
         modeloAgua.cargarDesdeArchivo(this);
