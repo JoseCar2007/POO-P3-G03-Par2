@@ -95,6 +95,8 @@ public class ListaActividades extends AppCompatActivity {
             os.writeObject(Actividad.getActividades());
         }catch(IOException e){
             Log.e("DEBUG", "Error al guardar las actividades", e);
+        }catch(Exception e){
+            Log.e("DEBUG", "Error al guardar las actividades", e);
         }
 
     }

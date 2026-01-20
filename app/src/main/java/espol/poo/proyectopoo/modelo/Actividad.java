@@ -1,5 +1,10 @@
 package espol.poo.proyectopoo.modelo;
 
+import android.content.Context;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -76,7 +81,18 @@ public class Actividad implements Serializable, Comparable<Actividad> {
      * Metodo estatico para tener una lista de actividades
      * ya creada antes de iniciar la aplicacion
      */
-    public static void setData(){
+
+    public static void cargarDatos(Context context){
+        try(FileInputStream fis = context.openFileInput("actividades.ser");
+            ObjectInputStream ois = new ObjectInputStream(fis)) {
+            actividades = (ArrayList<Actividad>) ois.readObject();
+        }catch(IOException e){
+            setData();
+        }catch(Exception e){
+            setData();
+        }
+    }
+    private static void setData(){
         String[] lnombre = {"Tarea de Hilos", "Tarea de Android", "Tarea de Lambda"};
 
         String[] lfecha = {"2026-01-01", "2026-01-02", "2026-01-03"};
