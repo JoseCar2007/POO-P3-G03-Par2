@@ -59,6 +59,7 @@ public class PantallaDetalles extends AppCompatActivity {
         ((TextView) tarjetaDetalles.findViewById(R.id.infoFecha)).setText(ac.getFecha());
         ((TextView) tarjetaDetalles.findViewById(R.id.infoTiempo)).setText(ac.getTiempoEstimado() + " horas");
         ((TextView) tarjetaDetalles.findViewById(R.id.infoAvance)).setText(ac.getAvance() + "%");
+        ((TextView) tarjetaDetalles.findViewById(R.id.infoDesc)).setText(ac.getDescripcion());
     }
     //Colocar todos los Views de una actividad personal
     private void setDetallesPersonal(View tarjetaDetalles, ActividadPersonal ac){
@@ -69,6 +70,7 @@ public class PantallaDetalles extends AppCompatActivity {
         ((TextView) tarjetaDetalles.findViewById(R.id.infoTiempo)).setText(ac.getTiempoEstimado() + " horas");
         ((TextView) tarjetaDetalles.findViewById(R.id.infoAvance)).setText(ac.getAvance() + "%");
         ((TextView) tarjetaDetalles.findViewById(R.id.infoLugar)).setText(ac.getLugar());
+        ((TextView) tarjetaDetalles.findViewById(R.id.infoDesc)).setText(ac.getDescripcion());
     }
     //Colocar historial de gestion de tiempo
     private void setDetallesTecnicas(View tarjetaHistorialTiempo, ActividadAcademica ac){

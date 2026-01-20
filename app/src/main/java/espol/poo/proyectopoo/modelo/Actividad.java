@@ -60,6 +60,9 @@ public class Actividad implements Serializable, Comparable<Actividad> {
     public String getNombre(){
         return nombre;
     }
+    public String getDescripcion(){
+        return descripcion;
+    }
     public String getFecha(){ return fecha; }
     public String getPrioridad(){ return prioridad; }
     public int getTiempoEstimado(){
