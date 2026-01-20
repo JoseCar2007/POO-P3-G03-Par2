@@ -18,7 +18,7 @@ public class RegistrarSostenibilidadActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registrar_sostenibilidad);
-
+        RegistroSostenibilidad.cargarDatos(this);
         modelo = new RegistroSostenibilidad();
 
         TextView tvFecha = findViewById(R.id.tvFechaRegistro);
@@ -45,6 +45,7 @@ public class RegistrarSostenibilidadActivity extends AppCompatActivity {
         btnGuardar.setOnClickListener(v -> {
             int[] seleccionados = adapter.obtenerIndicesSeleccionados();
             modelo.registrarAcciones(seleccionados);
+            RegistroSostenibilidad.guardarDatos(this);
             Toast.makeText(this, modelo.getMensajeDiario(), Toast.LENGTH_LONG).show();
             finish();
         });

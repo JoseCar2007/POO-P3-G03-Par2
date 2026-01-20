@@ -1,6 +1,8 @@
 package espol.poo.proyectopoo.modelo;
 
-public class AccionSostenible {
+import java.io.Serializable;
+
+public class AccionSostenible implements Serializable {
     /**
      * @param fecha: fecha en la que se realiza la acción
      * @param descripcion: descripción de la acción

@@ -1,5 +1,12 @@
 package espol.poo.proyectopoo.modelo;
 
+import android.content.Context;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -185,5 +192,43 @@ public class RegistroSostenibilidad {
     }
     public String[] getTodasLasAcciones() {
         return textosAcciones;
+    }
+    //Metodos para guardar datos con la serializacion
+    public static void guardarDatos(Context context) {
+        try {
+            FileOutputStream fos = context.openFileOutput("sostenibilidad_full.ser", Context.MODE_PRIVATE);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+
+            // Ahora podemos guardar la lista de objetos directamente porque son Serializables
+            oos.writeObject(accionesDiarias);
+            oos.writeObject(fechaUltimoRegistro);
+            oos.writeObject(accionesHoy);
+            oos.writeObject(contadoresSemana);
+
+            oos.close();
+            fos.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    //Cargar los datos
+    public static void cargarDatos(Context context) {
+        try {
+            FileInputStream fis = context.openFileInput("sostenibilidad_full.ser");
+            ObjectInputStream ois = new ObjectInputStream(fis);
+
+            // Leemos en el mismo orden que guardamos
+            accionesDiarias = (ArrayList<AccionSostenible>) ois.readObject();
+            fechaUltimoRegistro = (String) ois.readObject();
+            accionesHoy = (boolean[]) ois.readObject();
+            contadoresSemana = (int[]) ois.readObject();
+
+            ois.close();
+            fis.close();
+        } catch (FileNotFoundException e) {
+            // Primera ejecución: no hay archivo, usamos los valores por defecto
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

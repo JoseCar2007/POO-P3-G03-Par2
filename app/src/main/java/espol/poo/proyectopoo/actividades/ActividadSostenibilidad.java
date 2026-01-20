@@ -19,6 +19,7 @@ public class ActividadSostenibilidad extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sostenibilidad);
+        RegistroSostenibilidad.cargarDatos(this);
 
         modelo = new RegistroSostenibilidad();
 
